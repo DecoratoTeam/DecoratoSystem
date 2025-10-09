@@ -1,0 +1,6 @@
+@DecorteeSystem_HostAddress = http://localhost:5273
+
+GET {{DecorteeSystem_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
