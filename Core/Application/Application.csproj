@@ -7,10 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\" />
-    <Folder Include="Authntication\" />
-    <Folder Include="Services\Interfaces\" />
-    <Folder Include="Services\Implementation\" />
+    <PackageReference Include="Mapster" Version="7.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.21" />
   </ItemGroup>
 
   <ItemGroup>
