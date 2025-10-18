@@ -12,10 +12,13 @@ namespace Infrastructure.Repositories
 {
     public class AuthRepositor(DecorteeDbContext _dbContext) : IAuthRepository
     {
-        public Task<PasswordVerificationResult> CheckPasswordAsync(User user, string password, CancellationToken cancellationToken = default)
+        public async Task<PasswordVerificationResult> CheckPasswordAsync(User user, string password, CancellationToken cancellationToken = default)
         {
 
-            throw new NotImplementedException();
+            var hashedPassword = await _dbContext.Users.Where(x => x.Email == user.Email).Select(x => x.Password).FirstAsync(cancellationToken);
+            var result = new PasswordHasher<User>().VerifyHashedPassword(user, hashedPassword, password);
+
+            return result;
         }
 
         public async Task<User?> FindUserByEmail(string email, CancellationToken cancellationToken = default)

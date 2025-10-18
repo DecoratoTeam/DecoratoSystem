@@ -1,6 +1,7 @@
 ﻿using Application.Authntication;
 using Application.Services.Implementation;
 using Application.Services.Interfaces;
+using DecorteeSystem.MiddleWare;
 using Domain.IRepositories;
 using Infrastructure;
 using Infrastructure.Repositories;
@@ -11,7 +12,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
+using FluentValidation;
 
+using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 namespace DecorteeSystem
 {
     public static class DependencyInjection
@@ -25,7 +28,7 @@ namespace DecorteeSystem
 
             services.AddSwaggerGen();
 
-
+            services.AddFluentValidationConfig();
             var conncetionString = configuration.GetConnectionString("DefaultConnection") ??
                 throw new InvalidOperationException("Conncetion string 'Default Conncetion' is not found!");
 
@@ -33,6 +36,8 @@ namespace DecorteeSystem
 
             services.AddMapsterConfig();
             services.AddAuthConfig(configuration);
+
+            services.AddScoped<TransactionMiddleware>();
             services.AddScoped<IAuthRepository, AuthRepositor>();
             services.AddScoped<IAuthService, AuthService>();
             return services;
@@ -77,6 +82,12 @@ namespace DecorteeSystem
             mappingConfig.Scan(Assembly.GetExecutingAssembly());
 
             services.AddSingleton<IMapper>(new Mapper(mappingConfig));
+            return services;
+        }
+
+        public static IServiceCollection AddFluentValidationConfig(this IServiceCollection services)
+        {
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly()).AddFluentValidationAutoValidation();
             return services;
         }
     }

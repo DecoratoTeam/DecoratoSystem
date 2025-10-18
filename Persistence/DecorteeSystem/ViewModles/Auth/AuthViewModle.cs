@@ -1,6 +1,6 @@
 ﻿namespace DecorteeSystem.ViewModles.Auth
 {
-    public class AuthViewModle
-    {
-    }
+    public record AuthViewModle(string Id, string UserName, string Email, string Token, int ExpiresIn);
+
+
 }
