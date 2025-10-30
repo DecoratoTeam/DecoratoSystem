@@ -14,5 +14,6 @@ namespace Domain.IRepositories
         Task<User?> FindUserByEmail(string email, CancellationToken cancellationToken = default);
         Task<bool> IsEmailExists(string email, CancellationToken cancellationToken = default);
         Task<PasswordVerificationResult> CheckPasswordAsync(User user, string password, CancellationToken cancellationToken = default);
+        Task UpdateUserAsync(User user, CancellationToken cancellationToken = default);
     }
 }

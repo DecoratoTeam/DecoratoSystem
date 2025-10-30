@@ -37,5 +37,11 @@ namespace Infrastructure.Repositories
             user.Password=new PasswordHasher<User>().HashPassword(user,user.Password);
             await _dbContext.Users.AddAsync(user);
         }
+
+        public async Task UpdateUserAsync(User user, CancellationToken cancellationToken = default)
+        {
+            _dbContext.Users.Update(user);
+            await Task.CompletedTask;
+        }
     }
 }

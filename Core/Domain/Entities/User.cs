@@ -16,8 +16,8 @@ namespace Domain.Entities
         public string Phone { get; set; }
         public string Email { get; set; }
         public Role Role { get; set; }
-        public string? PasswordResetToken { get; set; }
-        public DateTime? PasswordResetTokenExpiry { get; set; }
+        public string? Otp { get; set; }
+        public DateTime? OtpExpiry { get; set; }
         public User()
         {
           Id=Guid.NewGuid().ToString(); 

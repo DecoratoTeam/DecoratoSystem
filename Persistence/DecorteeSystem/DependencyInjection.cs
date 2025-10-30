@@ -40,6 +40,7 @@ namespace DecorteeSystem
             services.AddScoped<TransactionMiddleware>();
             services.AddScoped<IAuthRepository, AuthRepositor>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IEmailService, EmailService>();
             return services;
         }
 
