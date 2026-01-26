@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Domain.Entities
+{
+    public class ShowcaseDesign : BaseEntity
+    {
+        public string Title { get; set; }             // "Living Room Serenbe, Georgia"
+        public string Location { get; set; }          // "Serenbe, Georgia"
+        public string ImageUrl { get; set; }          // Main image
+
+        // Categorization
+        public int RoomTypeId { get; set; }
+        public int DesignStyleId { get; set; }
+
+        // Display Flags
+        public bool IsPopular { get; set; }           // Show in Popular section?
+        public bool IsTrending { get; set; }          // Show in Trending?
+
+        // Stats
+        public int ViewCount { get; set; }
+        public double AverageRating { get; set; }     // 7.5 shown on card
+
+        // Relations
+        public RoomType RoomType { get; set; }
+        public DesignStyle DesignStyle { get; set; }
+        public ICollection<Rating> Ratings { get; set; }
+        public ICollection<SavedDesign> SavedDesigns { get; set; }
+    }
+
+}
