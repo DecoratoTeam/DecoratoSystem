@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Application.Dtos.Auth
 {
-    public record  RejesterDto(string Name, string UserName, string Password, string Phone, string Email);
+    public record  RejesterDto(string Name, string Email, string Password);
    
 }
