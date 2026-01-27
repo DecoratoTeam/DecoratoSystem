@@ -3,13 +3,12 @@ using Application.Dtos;
 using Application.Dtos.Auth;
 using Application.Services.Interfaces;
 using Domain.Entities;
+using Domain.Enums;
 using Domain.IRepositories;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Application.Services.Implementation
@@ -30,7 +29,6 @@ namespace Application.Services.Implementation
         public async Task<GeneralResponseDto<AuthDto>> LoginAsync(LoginDto loginDto, CancellationToken cancellationToken)
         {
             var user = await _authRepository.FindUserByEmail(loginDto.Email, cancellationToken);
-            //todo validate on user if its null;
 
             if (user is not null)
             {
@@ -55,7 +53,19 @@ namespace Application.Services.Implementation
             {
                 return GeneralResponseDto<bool>.Fail(ErrorType.DuplicatedEmail, "Another user with the same email is already exists");
             }
-            await _authRepository.RegisterAsync(rejesterDto.Adapt<User>(), cancellationToken);
+            
+            // Create user with default values for missing fields
+            var user = new User
+            {
+                Name = rejesterDto.Name,
+                Email = rejesterDto.Email,
+                Password = rejesterDto.Password,
+                UserName = rejesterDto.Email.Split('@')[0], // Use email prefix as username
+                Phone = string.Empty, // Default empty phone
+                Role = Role.Customer // Default role as Customer
+            };
+            
+            await _authRepository.RegisterAsync(user, cancellationToken);
 
             return GeneralResponseDto<bool>.Success(true);
         }
