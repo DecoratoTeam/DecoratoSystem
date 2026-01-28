@@ -6,11 +6,6 @@ using Domain.Entities;
 using Domain.IRepositories;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services.Implementation
 {
@@ -30,7 +25,6 @@ namespace Application.Services.Implementation
         public async Task<GeneralResponseDto<AuthDto>> LoginAsync(LoginDto loginDto, CancellationToken cancellationToken)
         {
             var user = await _authRepository.FindUserByEmail(loginDto.Email, cancellationToken);
-            //todo validate on user if its null;
 
             if (user is not null)
             {
@@ -44,20 +38,30 @@ namespace Application.Services.Implementation
                     return GeneralResponseDto<AuthDto>.Success(authDto);
                 }
             }
-            var error = GeneralResponseDto<AuthDto>.Fail(ErrorType.InvalidCredentials, "Invalid email/password");
-            return error;
+            
+            return GeneralResponseDto<AuthDto>.Fail(ErrorType.InvalidCredentials, "Invalid email/password");
         }
 
-        public async Task<GeneralResponseDto<bool>> RegisterAsync(RejesterDto rejesterDto, CancellationToken cancellationToken)
+        // ✅ Register without Token
+        public async Task<GeneralResponseDto<RegisterResponseDto>> RegisterAsync(RejesterDto rejesterDto, CancellationToken cancellationToken)
         {
             var IsEmailExist = await _authRepository.IsEmailExists(rejesterDto.Email, cancellationToken);
             if (IsEmailExist)
             {
-                return GeneralResponseDto<bool>.Fail(ErrorType.DuplicatedEmail, "Another user with the same email is already exists");
+                return GeneralResponseDto<RegisterResponseDto>.Fail(ErrorType.DuplicatedEmail, "Another user with the same email already exists");
             }
-            await _authRepository.RegisterAsync(rejesterDto.Adapt<User>(), cancellationToken);
 
-            return GeneralResponseDto<bool>.Success(true);
+            var user = rejesterDto.Adapt<User>();
+            
+            // Generate UserName from Email (take part before @)
+            user.UserName = rejesterDto.Email.Split('@')[0];
+            
+            await _authRepository.RegisterAsync(user, cancellationToken);
+
+            // ✅ Return user data WITHOUT token
+            var response = new RegisterResponseDto(user.Id, user.UserName, user.Email, user.Name);
+
+            return GeneralResponseDto<RegisterResponseDto>.Success(response);
         }
 
         public async Task<GeneralResponseDto<bool>> ForgotPasswordAsync(ForgotPasswordDto forgotPasswordDto, CancellationToken cancellationToken)
@@ -122,5 +126,4 @@ namespace Application.Services.Implementation
             return GeneralResponseDto<bool>.Success(true);
         }
     }
-    
 }

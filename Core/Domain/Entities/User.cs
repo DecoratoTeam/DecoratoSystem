@@ -13,7 +13,6 @@ namespace Domain.Entities
         public string Name { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public string Phone { get; set; }
         public string Email { get; set; }
         public Role Role { get; set; }
         public string? Otp { get; set; }
@@ -29,7 +28,7 @@ namespace Domain.Entities
 
         public User()
         {
-          Id=Guid.NewGuid().ToString(); 
+            Id = Guid.NewGuid().ToString();
         }
     }
 }
