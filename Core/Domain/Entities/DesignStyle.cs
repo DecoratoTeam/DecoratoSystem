@@ -1,17 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Domain.Entities
 {
-    public class DesignStyle
+    public class DesignStyle : BaseEntity
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string? Description { get; set; }
+        public string Name { get; set; }              // "Modern", "Rustic"
+        public string PreviewImage { get; set; }      // Preview image
 
-        public DesignStyle()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
-
-        public ICollection<ShowcaseDesign> ShowcaseDesigns { get; set; } = new List<ShowcaseDesign>();
-        public ICollection<AIDesign> AIDesigns { get; set; } = new List<AIDesign>();
+        public ICollection<ShowcaseDesign> ShowcaseDesigns { get; set; }
     }
+
 }

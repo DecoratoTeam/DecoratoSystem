@@ -1,30 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Domain.Entities
 {
-    public class ShowcaseDesign
+    public class ShowcaseDesign : BaseEntity
     {
-        public string Id { get; set; }
-        public string Title { get; set; }
-        public string? Description { get; set; }
-        public string ImageUrl { get; set; }
-        public bool IsPopular { get; set; }
-        public bool IsTrending { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public string Title { get; set; }             // "Living Room Serenbe, Georgia"
+        public string Location { get; set; }          // "Serenbe, Georgia"
+        public string ImageUrl { get; set; }          // Main image
 
-        public string RoomTypeId { get; set; }
+        // Categorization
+        public int RoomTypeId { get; set; }
+        public int DesignStyleId { get; set; }
+
+        // Display Flags
+        public bool IsPopular { get; set; }           // Show in Popular section?
+        public bool IsTrending { get; set; }          // Show in Trending?
+
+        // Stats
+        public int ViewCount { get; set; }
+        public double AverageRating { get; set; }     // 7.5 shown on card
+
+        // Relations
         public RoomType RoomType { get; set; }
-
-        public string DesignStyleId { get; set; }
         public DesignStyle DesignStyle { get; set; }
-
-        public string UserId { get; set; }
-        public User User { get; set; }
-
-        public ICollection<Rating> Ratings { get; set; } = new List<Rating>();
-
-        public ShowcaseDesign()
-        {
-            Id = Guid.NewGuid().ToString();
-            CreatedAt = DateTime.UtcNow;
-        }
+        public ICollection<Rating> Ratings { get; set; }
+        public ICollection<SavedDesign> SavedDesigns { get; set; }
     }
+
 }
