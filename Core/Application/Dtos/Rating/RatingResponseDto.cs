@@ -4,7 +4,7 @@ namespace Application.Dtos.Rating
 {
     public record RatingResponseDto(
         string Id,
-        string ShowcaseDesignId,
+        string? ShowcaseDesignId,
         string UserId,
         string UserName,
         int Value,

@@ -4,7 +4,7 @@ namespace Application.Dtos.ChatMessage
 {
     public record ChatMessageResponseDto(
         string Id,
-        string ConversationId,
+        string? ConversationId,
         string UserId,
         string UserName,
         string Content,

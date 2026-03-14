@@ -4,7 +4,7 @@ namespace Application.Dtos.AIDesign
 {
     public record AIDesignResponseDto(
         string Id,
-        string OriginalImageUrl,
+        string? OriginalImageUrl,
         string GeneratedImageUrl,
         string? Prompt,
         string RoomTypeId,

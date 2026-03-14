@@ -8,9 +8,10 @@ namespace Domain.Entities
 {
     public class Comment : BaseEntity
     {
-        public int PostId { get; set; }
-        public int UserId { get; set; }
+        public string PostId { get; set; }
+        public string UserId { get; set; }
         public string Content { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         // Relations
         public Post Post { get; set; }

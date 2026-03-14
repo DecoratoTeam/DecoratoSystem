@@ -9,8 +9,8 @@ namespace Domain.Entities
     // للـ Recently Watched و Saved Designs
     public class SavedDesign : BaseEntity
     {
-        public int UserId { get; set; }
-        public int ShowcaseDesignId { get; set; }
+        public string UserId { get; set; }
+        public string ShowcaseDesignId { get; set; }
 
         public bool IsSaved { get; set; }           // حفظ في المفضلة
         public DateTime? LastViewedAt { get; set; }  // آخر مشاهدة
