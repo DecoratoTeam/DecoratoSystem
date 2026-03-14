@@ -12,6 +12,7 @@ namespace Domain.Entities
         public string Id { get; set; }
         // Basic Info (Sign Up Screen)
         public string Name { get; set; }
+        public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string? ProfilePicture { get; set; }
@@ -30,9 +31,10 @@ namespace Domain.Entities
         public string Language { get; set; } = "English";
 
         // Relations
-        public ICollection<AIDesign> MyAIDesigns { get; set; }
-        public ICollection<Post> MyPosts { get; set; }
-        public ICollection<Rating> MyRatings { get; set; }
+        public ICollection<AIDesign> AIDesigns { get; set; }
+        public ICollection<Post> Posts { get; set; }
+        public ICollection<ShowcaseDesign> ShowcaseDesigns { get; set; }
+        public ICollection<Rating> Ratings { get; set; }
         public ICollection<ChatMessage> ChatMessages { get; set; }
         public ICollection<Vote> Votes { get; set; }
         public ICollection<Comment> Comments { get; set; }

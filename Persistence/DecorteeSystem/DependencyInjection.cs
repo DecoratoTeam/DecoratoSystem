@@ -76,6 +76,7 @@ namespace DecorteeSystem
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IRatingRepository, RatingRepository>();
             services.AddScoped<IChatMessageRepository, ChatMessageRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             // Services
             services.AddScoped<IRoomTypeService, RoomTypeService>();
@@ -87,6 +88,7 @@ namespace DecorteeSystem
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IRatingService, RatingService>();
             services.AddScoped<IChatMessageService, ChatMessageService>();
+            services.AddScoped<IProfileService, ProfileService>();
 
             return services;
         }

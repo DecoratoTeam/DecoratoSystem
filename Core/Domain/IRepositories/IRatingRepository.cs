@@ -9,5 +9,6 @@ namespace Domain.IRepositories
     {
         Task<Rating?> GetByUserAndDesignAsync(string userId, string showcaseDesignId, CancellationToken cancellationToken = default);
         Task<IEnumerable<Rating>> GetByDesignIdAsync(string showcaseDesignId, CancellationToken cancellationToken = default);
+        Task<IEnumerable<Rating>> GetByUserIdAsync(string userId, CancellationToken cancellationToken = default);
     }
 }
