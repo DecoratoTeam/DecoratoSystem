@@ -16,6 +16,7 @@ namespace Domain.Entities
         public string Password { get; set; }
         public string? ProfilePicture { get; set; }
         public string? Bio { get; set; }
+        public string UserName { get; set; }
         public Role Role { get; set; }
 
         public string? Otp { get; set; }
@@ -30,12 +31,12 @@ namespace Domain.Entities
         public string Language { get; set; } = "English";
 
         // Relations
-        public ICollection<AIDesign> MyAIDesigns { get; set; }
-        public ICollection<Post> MyPosts { get; set; }
-        public ICollection<Rating> MyRatings { get; set; }
-        public ICollection<ChatMessage> ChatMessages { get; set; }
-        public ICollection<Vote> Votes { get; set; }
-        public ICollection<Comment> Comments { get; set; }
+        public ICollection<AIDesign> MyAIDesigns { get; set; } = new List<AIDesign>();
+        public ICollection<Post> MyPosts { get; set; } = new List<Post>();
+        public ICollection<Rating> MyRatings { get; set; } = new List<Rating>();
+        public ICollection<ChatMessage> ChatMessages { get; set; } = new List<ChatMessage>();
+        public ICollection<Vote> Votes { get; set; } = new List<Vote>();
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
         
         public User()
         {

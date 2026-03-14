@@ -47,6 +47,12 @@ namespace Infrastructure
                 .HasForeignKey(s => s.DesignStyleId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<ShowcaseDesign>()
+                .HasOne(s => s.User)
+                .WithMany()
+                .HasForeignKey(s => s.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             // AIDesign relationships
             modelBuilder.Entity<AIDesign>()
                 .HasOne(a => a.RoomType)

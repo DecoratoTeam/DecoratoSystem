@@ -23,5 +23,15 @@ namespace Infrastructure.Repositories
                 .OrderByDescending(r => r.CreatedAt)
                 .ToListAsync(cancellationToken);
         }
+
+        public async Task<IEnumerable<Rating>> GetByUserIdAsync(string userId, CancellationToken cancellationToken = default)
+        {
+            return await _dbSet
+                .Include(r => r.ShowcaseDesign)
+                .Include(r => r.Post)
+                .Where(r => r.UserId == userId)
+                .OrderByDescending(r => r.CreatedAt)
+                .ToListAsync(cancellationToken);
+        }
     }
 }

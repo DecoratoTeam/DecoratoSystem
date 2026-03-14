@@ -12,9 +12,9 @@ namespace DecorteeSystem.ViewModles
         public static GeneralResponseViewModle<T> Fail(ErrorType type, string message)
             => new() { Error = type, IsSuccess = false, Message = message };
 
-        public T Data { get; set; }
+        public T Data { get; set; } = default!;
         public bool IsSuccess { get; set; }
         public ErrorType Error { get; set; }
-        public string Message { get; set; }
+        public string Message { get; set; } = string.Empty;
     }
 }
