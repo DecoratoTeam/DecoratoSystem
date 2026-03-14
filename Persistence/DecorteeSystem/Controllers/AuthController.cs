@@ -30,7 +30,6 @@ namespace DecorteeSystem.Controllers
                 : GeneralResponseViewModle<RegisterResponseViewModle>.Fail(result.Error, result.Message));
         }
 
-        // ✅ Login - Returns 200 OK only (removed 400 Bad Request)
         [HttpPost("Login")]
         [ProducesResponseType(typeof(GeneralResponseViewModle<AuthViewModle>), StatusCodes.Status200OK)]
         public async Task<ActionResult<GeneralResponseViewModle<AuthViewModle>>> Login(
@@ -39,10 +38,27 @@ namespace DecorteeSystem.Controllers
         {
             var authDto = await _authService.LoginAsync(loginView.Adapt<LoginDto>(), cancellationToken);
 
-            // ✅ Always return 200 OK (even for errors)
             return Ok(authDto.IsSuccess
                 ? GeneralResponseViewModle<AuthViewModle>.Success(authDto.Data.Adapt<AuthViewModle>())
                 : GeneralResponseViewModle<AuthViewModle>.Fail(authDto.Error, authDto.Message));
+        }
+
+        /// <summary>
+        /// Login with Google. Send the Google ID Token received from the mobile SDK.
+        /// </summary>
+        [HttpPost("GoogleLogin")]
+        [ProducesResponseType(typeof(GeneralResponseViewModle<AuthViewModle>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<GeneralResponseViewModle<AuthViewModle>>> GoogleLogin(
+            [FromBody] GoogleLoginViewModle googleLoginView,
+            CancellationToken cancellationToken)
+        {
+            var result = await _authService.GoogleLoginAsync(
+                googleLoginView.Adapt<GoogleLoginDto>(),
+                cancellationToken);
+
+            return Ok(result.IsSuccess
+                ? GeneralResponseViewModle<AuthViewModle>.Success(result.Data.Adapt<AuthViewModle>())
+                : GeneralResponseViewModle<AuthViewModle>.Fail(result.Error, result.Message));
         }
 
         [HttpPost("ForgotPassword")]

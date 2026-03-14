@@ -15,6 +15,8 @@ namespace Infrastructure
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<ChatMessage> ChatMessages { get; set; }
+        public DbSet<SavedDesign> SavedDesigns { get; set; }
+        public DbSet<SavedPost> SavedPosts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,6 +25,11 @@ namespace Infrastructure
             // Vote: Unique constraint (one vote per user per post)
             modelBuilder.Entity<Vote>()
                 .HasIndex(v => new { v.PostId, v.UserId })
+                .IsUnique();
+
+            // SavedPost: Unique constraint (one save per user per post)
+            modelBuilder.Entity<SavedPost>()
+                .HasIndex(sp => new { sp.PostId, sp.UserId })
                 .IsUnique();
 
             // Rating: Unique constraint (one rating per user per design)
@@ -34,17 +41,23 @@ namespace Infrastructure
             modelBuilder.Entity<ChatMessage>()
                 .HasIndex(c => c.ConversationId);
 
-            // ShowcaseDesign relationships
-            modelBuilder.Entity<ShowcaseDesign>()
-                .HasOne(s => s.RoomType)
-                .WithMany(r => r.ShowcaseDesigns)
-                .HasForeignKey(s => s.RoomTypeId)
+            // User relationships - prevent cascade delete
+            modelBuilder.Entity<Post>()
+                .HasOne(p => p.User)
+                .WithMany(u => u.MyPosts)
+                .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<ShowcaseDesign>()
                 .HasOne(s => s.DesignStyle)
                 .WithMany(d => d.ShowcaseDesigns)
                 .HasForeignKey(s => s.DesignStyleId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ShowcaseDesign>()
+                .HasOne(s => s.User)
+                .WithMany(u => u.MyShowcaseDesigns)
+                .HasForeignKey(s => s.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // AIDesign relationships
@@ -58,6 +71,12 @@ namespace Infrastructure
                 .HasOne(a => a.DesignStyle)
                 .WithMany(d => d.AIDesigns)
                 .HasForeignKey(a => a.DesignStyleId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<AIDesign>()
+                .HasOne(a => a.User)
+                .WithMany(u => u.MyAIDesigns)
+                .HasForeignKey(a => a.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

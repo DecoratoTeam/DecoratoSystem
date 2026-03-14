@@ -12,5 +12,6 @@ namespace Domain.IRepositories
         Task<Post?> GetWithDetailsAsync(string id, CancellationToken cancellationToken = default);
         Task<IEnumerable<Post>> GetByUserIdAsync(string userId, CancellationToken cancellationToken = default);
         Task<IEnumerable<Post>> GetAllWithDetailsAsync(CancellationToken cancellationToken = default);
+        Task<(IEnumerable<Post> Items, int TotalCount)> GetByUserIdPaginatedAsync(string userId, int page, int pageSize, CancellationToken cancellationToken = default);
     }
 }

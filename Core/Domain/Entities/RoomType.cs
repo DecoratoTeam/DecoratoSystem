@@ -9,9 +9,11 @@ namespace Domain.Entities
     public class RoomType : BaseEntity
     {
         public string Name { get; set; }              // "Living Room", "Kitchen"
+        public string? Description { get; set; }
         public string IconUrl { get; set; }           // Icon for filter button
 
         public ICollection<ShowcaseDesign> ShowcaseDesigns { get; set; }
+        public ICollection<AIDesign> AIDesigns { get; set; }
     }
 
 }

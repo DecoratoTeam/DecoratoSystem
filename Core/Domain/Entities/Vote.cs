@@ -8,13 +8,13 @@ namespace Domain.Entities
 {
     public class Vote : BaseEntity
     {
-        public int PostId { get; set; }
-        public int UserId { get; set; }
-        public bool IsUpvote { get; set; }            // true = ↑, false = ↓
+        public string PostId { get; set; }
+        public string UserId { get; set; }
+
+        public bool IsUpvote { get; set; } // true = ↑, false = ↓
 
         // Relations
         public Post Post { get; set; }
         public User User { get; set; }
     }
-
 }

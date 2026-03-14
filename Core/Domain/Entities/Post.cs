@@ -9,10 +9,13 @@ namespace Domain.Entities
 {
     public class Post : BaseEntity
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
-        public string ImageUrl { get; set; }
-        public string Caption { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public string? ImageUrl { get; set; }
+        
+        public DateTime? UpdatedAt { get; set; }
 
         // Stats
         public int ViewCount { get; set; }
@@ -22,6 +25,7 @@ namespace Domain.Entities
         public ICollection<Vote> Votes { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Rating> Ratings { get; set; }
+        public ICollection<SavedPost> SavedPosts { get; set; }
     }
 
 }

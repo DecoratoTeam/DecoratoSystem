@@ -34,8 +34,8 @@ namespace Application.Services.Implementation
         {
             var entity = new AIDesign
             {
-                OriginalImageUrl = dto.OriginalImageUrl,
-                GeneratedImageUrl = dto.GeneratedImageUrl,
+                InputImageUrl = dto.OriginalImageUrl,
+                ResultImageUrl = dto.GeneratedImageUrl,
                 Prompt = dto.Prompt,
                 RoomTypeId = dto.RoomTypeId,
                 DesignStyleId = dto.DesignStyleId,
@@ -52,8 +52,8 @@ namespace Application.Services.Implementation
             if (entity == null)
                 return GeneralResponseDto<AIDesignResponseDto>.Fail(ErrorType.NotFound, "AIDesign not found");
 
-            entity.OriginalImageUrl = dto.OriginalImageUrl;
-            entity.GeneratedImageUrl = dto.GeneratedImageUrl;
+            entity.InputImageUrl = dto.OriginalImageUrl;
+            entity.ResultImageUrl = dto.GeneratedImageUrl;
             entity.Prompt = dto.Prompt;
             entity.RoomTypeId = dto.RoomTypeId;
             entity.DesignStyleId = dto.DesignStyleId;
@@ -83,8 +83,8 @@ namespace Application.Services.Implementation
         {
             return new AIDesignResponseDto(
                 entity.Id,
-                entity.OriginalImageUrl,
-                entity.GeneratedImageUrl,
+                entity.InputImageUrl ?? string.Empty,
+                entity.ResultImageUrl,
                 entity.Prompt,
                 entity.RoomTypeId,
                 entity.RoomType?.Name ?? string.Empty,

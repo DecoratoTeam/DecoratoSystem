@@ -9,9 +9,11 @@ using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
+using System.Text;
 using FluentValidation;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using Microsoft.OpenApi.Models;
@@ -42,6 +44,30 @@ namespace DecorteeSystem
                     Description = "Interior Design API"
                 });
                 
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Enter 'Bearer' [space] and then your token in the text input below.",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
+                
                 c.SupportNonNullableReferenceTypes();
             });
 
@@ -50,8 +76,17 @@ namespace DecorteeSystem
             var connectionString = configuration.GetConnectionString("DefaultConnection") ??
                 throw new InvalidOperationException("Connection string 'DefaultConnection' is not found!");
 
-            services.AddDbContext<DecorteeDbContext>(options => 
-                options.UseSqlServer(connectionString));
+            services.AddDbContext<DecorteeDbContext>(options =>
+            {
+                options.UseSqlServer(connectionString, sqlOptions =>
+                    sqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 5,
+                        maxRetryDelay: TimeSpan.FromSeconds(10),
+                        errorNumbersToAdd: null));
+
+                options.ConfigureWarnings(warnings =>
+                    warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
+            });
 
             services.AddMapsterConfig();
             services.AddAuthConfig(configuration);
@@ -76,6 +111,10 @@ namespace DecorteeSystem
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IRatingRepository, RatingRepository>();
             services.AddScoped<IChatMessageRepository, ChatMessageRepository>();
+            services.AddScoped<ISavedPostRepository, SavedPostRepository>();
+            // Profile
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProfileService, ProfileService>();
 
             // Services
             services.AddScoped<IRoomTypeService, RoomTypeService>();
@@ -119,6 +158,7 @@ namespace DecorteeSystem
                     ValidateLifetime = true,
                     ValidIssuer = jwtOptions.Issuer,
                     ValidAudience = jwtOptions.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Key))
                 };
             });
             

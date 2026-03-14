@@ -9,11 +9,12 @@ namespace Application.Services.Interfaces
     {
         Task<GeneralResponseDto<AuthDto>> LoginAsync(LoginDto loginDto, CancellationToken cancellationToken);
 
-        // ✅ Register returns RegisterResponseDto (without Token)
         Task<GeneralResponseDto<RegisterResponseDto>> RegisterAsync(RejesterDto rejesterDto, CancellationToken cancellationToken);
 
         Task<GeneralResponseDto<bool>> ForgotPasswordAsync(ForgotPasswordDto forgotPasswordDto, CancellationToken cancellationToken);
 
         Task<GeneralResponseDto<bool>> ResetPasswordAsync(ResetPasswordDto resetPasswordDto, CancellationToken cancellationToken);
+
+        Task<GeneralResponseDto<AuthDto>> GoogleLoginAsync(GoogleLoginDto googleLoginDto, CancellationToken cancellationToken);
     }
 }

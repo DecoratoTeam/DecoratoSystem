@@ -13,5 +13,7 @@ namespace Application.Dtos.Post
         DateTime? UpdatedAt,
         int UpvoteCount,
         int DownvoteCount,
-        int CommentCount);
+        int CommentCount,
+        bool IsLiked,
+        bool IsSaved);
 }

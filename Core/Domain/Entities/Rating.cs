@@ -8,13 +8,13 @@ namespace Domain.Entities
 {
     public class Rating : BaseEntity
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         // What did they rate? (Only ONE will have value)
-        public int? ShowcaseDesignId { get; set; }
-        public int? PostId { get; set; }
+        public string? ShowcaseDesignId { get; set; }
+        public string? PostId { get; set; }
 
-        public int Stars { get; set; }                // 1-5 stars
+        public int Value { get; set; }                // Was "Stars", now matches migration: 1-5 rating value
         public string? Review { get; set; }           // Optional review text
 
         // Relations

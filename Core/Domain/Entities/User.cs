@@ -10,7 +10,9 @@ namespace Domain.Entities
     public class User
     {
         public string Id { get; set; }
+        
         // Basic Info (Sign Up Screen)
+        public string UserName { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
@@ -31,11 +33,14 @@ namespace Domain.Entities
 
         // Relations
         public ICollection<AIDesign> MyAIDesigns { get; set; }
+        public ICollection<ShowcaseDesign> MyShowcaseDesigns { get; set; }
         public ICollection<Post> MyPosts { get; set; }
         public ICollection<Rating> MyRatings { get; set; }
         public ICollection<ChatMessage> ChatMessages { get; set; }
         public ICollection<Vote> Votes { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        public ICollection<SavedDesign> SavedDesigns { get; set; }
+        public ICollection<SavedPost> SavedPosts { get; set; }
         
         public User()
         {

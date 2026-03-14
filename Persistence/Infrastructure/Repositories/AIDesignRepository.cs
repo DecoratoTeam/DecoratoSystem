@@ -13,9 +13,9 @@ namespace Infrastructure.Repositories
         public async Task<IEnumerable<AIDesign>> GetByUserIdAsync(string userId, CancellationToken cancellationToken = default)
         {
             return await _dbSet
+                .Include(a => a.User)
                 .Include(a => a.RoomType)
                 .Include(a => a.DesignStyle)
-                .Include(a => a.User)
                 .Where(a => a.UserId == userId)
                 .OrderByDescending(a => a.CreatedAt)
                 .ToListAsync(cancellationToken);

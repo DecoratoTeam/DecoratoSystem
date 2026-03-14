@@ -23,10 +23,9 @@ namespace Infrastructure.Repositories
             return await _dbSet.ToListAsync(cancellationToken);
         }
 
-        public async Task<T> AddAsync(T entity, CancellationToken cancellationToken = default)
+        public async Task AddAsync(T entity, CancellationToken cancellationToken = default)
         {
             await _dbSet.AddAsync(entity, cancellationToken);
-            return entity;
         }
 
         public Task UpdateAsync(T entity, CancellationToken cancellationToken = default)
@@ -41,34 +40,30 @@ namespace Infrastructure.Repositories
             return Task.CompletedTask;
         }
 
-        public IQueryable<T> Query()
+        public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default)
         {
-            return _dbSet.AsQueryable();
-        }
-
-        public Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task IGenericRepository<T>.AddAsync(T entity, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
+            return await _dbSet.Where(predicate).ToListAsync(cancellationToken);
         }
 
         public void Update(T entity)
         {
-            throw new NotImplementedException();
+            _dbSet.Update(entity);
         }
 
         public void Delete(T entity)
         {
-            throw new NotImplementedException();
+            _dbSet.Remove(entity);
         }
 
-        public Task<bool> ExistsAsync(string id, CancellationToken cancellationToken = default)
+        public async Task<bool> ExistsAsync(string id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var entity = await GetByIdAsync(id, cancellationToken);
+            return entity != null;
+        }
+
+        public IQueryable<T> Query()
+        {
+            return _dbSet.AsQueryable();
         }
     }
 }

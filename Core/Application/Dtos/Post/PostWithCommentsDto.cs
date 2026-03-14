@@ -15,5 +15,7 @@ namespace Application.Dtos.Post
         DateTime? UpdatedAt,
         int UpvoteCount,
         int DownvoteCount,
-        List<CommentResponseDto> Comments);
+        List<CommentResponseDto> Comments,
+        bool IsLiked,
+        bool IsSaved);
 }

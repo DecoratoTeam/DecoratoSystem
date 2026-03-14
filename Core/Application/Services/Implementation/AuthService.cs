@@ -3,7 +3,9 @@ using Application.Dtos;
 using Application.Dtos.Auth;
 using Application.Services.Interfaces;
 using Domain.Entities;
+using Domain.Enums;
 using Domain.IRepositories;
+using Google.Apis.Auth;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 
@@ -124,6 +126,100 @@ namespace Application.Services.Implementation
             await _authRepository.UpdateUserAsync(user, cancellationToken);
 
             return GeneralResponseDto<bool>.Success(true);
+        }
+
+        // ✅ Google Login
+        public async Task<GeneralResponseDto<AuthDto>> GoogleLoginAsync(GoogleLoginDto googleLoginDto, CancellationToken cancellationToken)
+        {
+            // 1. Validate the Google ID Token
+            GoogleJsonWebSignature.Payload payload;
+            try
+            {
+                payload = await GoogleJsonWebSignature.ValidateAsync(googleLoginDto.IdToken);
+            }
+            catch (InvalidJwtException)
+            {
+                return GeneralResponseDto<AuthDto>.Fail(ErrorType.InvalidCredentials, "Invalid Google token");
+            }
+
+            // 2. Extract user info from Google payload
+            var email = payload.Email;
+            var name = payload.Name ?? email.Split('@')[0];
+            var googleId = payload.Subject;
+            var profilePicture = payload.Picture;
+
+            if (string.IsNullOrEmpty(email))
+            {
+                return GeneralResponseDto<AuthDto>.Fail(ErrorType.InvalidCredentials, "Google account has no email");
+            }
+
+            // 3. Check if user already exists
+            var user = await _authRepository.FindUserByEmail(email, cancellationToken);
+
+            if (user is null)
+            {
+                // 4. Create new user
+                user = new User
+                {
+                    Name = name,
+                    Email = email,
+                    UserName = email.Split('@')[0],
+                    GoogleId = googleId,
+                    ProfilePicture = profilePicture,
+                    Role = Role.Customer,
+                    Password = GenerateRandomPassword()
+                };
+
+                await _authRepository.RegisterAsync(user, cancellationToken);
+            }
+            else
+            {
+                // 5. Link Google ID if not linked yet
+                if (string.IsNullOrEmpty(user.GoogleId))
+                {
+                    user.GoogleId = googleId;
+                }
+
+                // Update profile picture from Google if user has none
+                if (string.IsNullOrEmpty(user.ProfilePicture) && !string.IsNullOrEmpty(profilePicture))
+                {
+                    user.ProfilePicture = profilePicture;
+                }
+
+                await _authRepository.UpdateUserAsync(user, cancellationToken);
+            }
+
+            // 6. Generate JWT
+            var (token, expiresIn) = _jwtProvider.GenerateJwtToken(user);
+
+            var authDto = new AuthDto(user.Id, user.UserName, user.Email, token, expiresIn);
+
+            return GeneralResponseDto<AuthDto>.Success(authDto);
+        }
+
+        private static string GenerateRandomPassword(int length = 16)
+        {
+            const string letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const string digits = "1234567890";
+            const string specials = "!@#$%^&*()-_=+";
+
+            var random = new Random();
+            var res = new char[length];
+
+            // Ensure at least one of each required type
+            res[0] = letters[random.Next(letters.Length)];
+            res[1] = char.ToUpper(letters[random.Next(26)]);
+            res[2] = digits[random.Next(digits.Length)];
+            res[3] = specials[random.Next(specials.Length)];
+
+            var all = letters + digits + specials;
+            for (int i = 4; i < length; i++)
+            {
+                res[i] = all[random.Next(all.Length)];
+            }
+
+            // Shuffle
+            return new string(res.OrderBy(_ => random.Next()).ToArray());
         }
     }
 }

@@ -34,15 +34,15 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("GeneratedImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OriginalImageUrl")
-                        .IsRequired()
+                    b.Property<string>("InputImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Prompt")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ResultImageUrl")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RoomTypeId")
@@ -69,16 +69,21 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("AIDesignId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConversationId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsFromUser")
                         .HasColumnType("bit");
@@ -88,6 +93,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AIDesignId");
 
                     b.HasIndex("ConversationId");
 
@@ -133,10 +140,17 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreviewImage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -171,6 +185,9 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("ViewCount")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
@@ -186,11 +203,13 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("PostId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Review")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShowcaseDesignId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("UserId")
@@ -202,10 +221,13 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PostId");
+
                     b.HasIndex("UserId");
 
                     b.HasIndex("ShowcaseDesignId", "UserId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ShowcaseDesignId] IS NOT NULL");
 
                     b.ToTable("Ratings");
                 });
@@ -215,7 +237,14 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IconUrl")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -227,10 +256,70 @@ namespace Infrastructure.Migrations
                     b.ToTable("RoomTypes");
                 });
 
+            modelBuilder.Entity("Domain.Entities.SavedDesign", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsSaved")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastViewedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ShowcaseDesignId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ShowcaseDesignId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("SavedDesigns");
+                });
+
+            modelBuilder.Entity("Domain.Entities.SavedPost", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PostId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("PostId", "UserId")
+                        .IsUnique();
+
+                    b.ToTable("SavedPosts");
+                });
+
             modelBuilder.Entity("Domain.Entities.ShowcaseDesign", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("AverageRating")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -264,6 +353,9 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("ViewCount")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DesignStyleId");
@@ -280,7 +372,23 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Bio")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FacebookId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GoogleId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDarkMode")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Language")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -296,6 +404,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfilePicture")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Role")
@@ -354,9 +465,9 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.User", "User")
-                        .WithMany("AIDesigns")
+                        .WithMany("MyAIDesigns")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("DesignStyle");
@@ -368,11 +479,17 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.ChatMessage", b =>
                 {
+                    b.HasOne("Domain.Entities.AIDesign", "AIDesign")
+                        .WithMany("ChatMessages")
+                        .HasForeignKey("AIDesignId");
+
                     b.HasOne("Domain.Entities.User", "User")
                         .WithMany("ChatMessages")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AIDesign");
 
                     b.Navigation("User");
                 });
@@ -399,9 +516,9 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.Post", b =>
                 {
                     b.HasOne("Domain.Entities.User", "User")
-                        .WithMany("Posts")
+                        .WithMany("MyPosts")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -409,19 +526,61 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Rating", b =>
                 {
+                    b.HasOne("Domain.Entities.Post", "Post")
+                        .WithMany("Ratings")
+                        .HasForeignKey("PostId");
+
                     b.HasOne("Domain.Entities.ShowcaseDesign", "ShowcaseDesign")
                         .WithMany("Ratings")
+                        .HasForeignKey("ShowcaseDesignId");
+
+                    b.HasOne("Domain.Entities.User", "User")
+                        .WithMany("MyRatings")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("ShowcaseDesign");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Entities.SavedDesign", b =>
+                {
+                    b.HasOne("Domain.Entities.ShowcaseDesign", "ShowcaseDesign")
+                        .WithMany("SavedDesigns")
                         .HasForeignKey("ShowcaseDesignId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.User", "User")
-                        .WithMany("Ratings")
+                        .WithMany("SavedDesigns")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ShowcaseDesign");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Entities.SavedPost", b =>
+                {
+                    b.HasOne("Domain.Entities.Post", "Post")
+                        .WithMany("SavedPosts")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.User", "User")
+                        .WithMany("SavedPosts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
 
                     b.Navigation("User");
                 });
@@ -437,13 +596,13 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Entities.RoomType", "RoomType")
                         .WithMany("ShowcaseDesigns")
                         .HasForeignKey("RoomTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.User", "User")
-                        .WithMany("ShowcaseDesigns")
+                        .WithMany("MyShowcaseDesigns")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("DesignStyle");
@@ -472,6 +631,11 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Domain.Entities.AIDesign", b =>
+                {
+                    b.Navigation("ChatMessages");
+                });
+
             modelBuilder.Entity("Domain.Entities.DesignStyle", b =>
                 {
                     b.Navigation("AIDesigns");
@@ -482,6 +646,10 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.Post", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Ratings");
+
+                    b.Navigation("SavedPosts");
 
                     b.Navigation("Votes");
                 });
@@ -496,21 +664,27 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.ShowcaseDesign", b =>
                 {
                     b.Navigation("Ratings");
+
+                    b.Navigation("SavedDesigns");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
-                    b.Navigation("AIDesigns");
-
                     b.Navigation("ChatMessages");
 
                     b.Navigation("Comments");
 
-                    b.Navigation("Posts");
+                    b.Navigation("MyAIDesigns");
 
-                    b.Navigation("Ratings");
+                    b.Navigation("MyPosts");
 
-                    b.Navigation("ShowcaseDesigns");
+                    b.Navigation("MyRatings");
+
+                    b.Navigation("MyShowcaseDesigns");
+
+                    b.Navigation("SavedDesigns");
+
+                    b.Navigation("SavedPosts");
 
                     b.Navigation("Votes");
                 });

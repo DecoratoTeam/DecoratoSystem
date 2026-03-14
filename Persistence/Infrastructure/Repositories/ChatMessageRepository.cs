@@ -14,6 +14,7 @@ namespace Infrastructure.Repositories
         {
             return await _dbSet
                 .Include(c => c.User)
+                .Include(c => c.AIDesign)
                 .Where(c => c.ConversationId == conversationId)
                 .OrderBy(c => c.CreatedAt)
                 .ToListAsync(cancellationToken);
@@ -22,7 +23,7 @@ namespace Infrastructure.Repositories
         public async Task<IEnumerable<ChatMessage>> GetByUserIdAsync(string userId, CancellationToken cancellationToken = default)
         {
             return await _dbSet
-                .Include(c => c.User)
+                .Include(c => c.AIDesign)
                 .Where(c => c.UserId == userId)
                 .OrderByDescending(c => c.CreatedAt)
                 .ToListAsync(cancellationToken);
