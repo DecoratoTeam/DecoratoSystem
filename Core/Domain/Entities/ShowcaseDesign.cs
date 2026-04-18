@@ -37,4 +37,5 @@ namespace Domain.Entities
             User = null!;
         }
     }
+
 }

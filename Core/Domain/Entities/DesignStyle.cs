@@ -16,4 +16,5 @@ namespace Domain.Entities
             Name = string.Empty;
         }
     }
+
 }
