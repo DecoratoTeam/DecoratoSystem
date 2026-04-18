@@ -16,34 +16,31 @@ namespace DecorteeSystem.Controllers
         private readonly IRatingService _service = service;
 
         [HttpGet]
-        public async Task<GeneralResponseDto<IEnumerable<RatingResponseDto>>> GetAll(CancellationToken cancellationToken)
-        {
-            return await _service.GetAllAsync(cancellationToken);
-        }
+        public async Task<GeneralResponseDto<IEnumerable<RatingResponseDto>>> GetAll(
+            CancellationToken cancellationToken)
+            => await _service.GetAllAsync(cancellationToken);
 
         [HttpGet("{id}")]
-        public async Task<GeneralResponseDto<RatingResponseDto>> GetById(string id, CancellationToken cancellationToken)
-        {
-            return await _service.GetByIdAsync(id, cancellationToken);
-        }
+        public async Task<GeneralResponseDto<RatingResponseDto>> GetById(
+            string id, CancellationToken cancellationToken)
+            => await _service.GetByIdAsync(id, cancellationToken);
 
         [HttpGet("design/{showcaseDesignId}")]
-        public async Task<GeneralResponseDto<IEnumerable<RatingResponseDto>>> GetByDesignId(string showcaseDesignId, CancellationToken cancellationToken)
-        {
-            return await _service.GetByDesignIdAsync(showcaseDesignId, cancellationToken);
-        }
+        public async Task<GeneralResponseDto<IEnumerable<RatingResponseDto>>> GetByDesignId(
+            string showcaseDesignId, CancellationToken cancellationToken)
+            => await _service.GetByDesignIdAsync(showcaseDesignId, cancellationToken);
 
         [HttpPost]
-        public async Task<GeneralResponseDto<RatingResponseDto>> CreateOrUpdate([FromBody] CreateRatingDto dto, CancellationToken cancellationToken)
+        public async Task<GeneralResponseDto<RatingResponseDto>> CreateOrUpdate(
+            [FromBody] CreateRatingDto dto, CancellationToken cancellationToken)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty;
             return await _service.CreateOrUpdateAsync(userId, dto, cancellationToken);
         }
 
         [HttpDelete("{id}")]
-        public async Task<GeneralResponseDto<bool>> Delete(string id, CancellationToken cancellationToken)
-        {
-            return await _service.DeleteAsync(id, cancellationToken);
-        }
+        public async Task<GeneralResponseDto<bool>> Delete(
+            string id, CancellationToken cancellationToken)
+            => await _service.DeleteAsync(id, cancellationToken);
     }
 }

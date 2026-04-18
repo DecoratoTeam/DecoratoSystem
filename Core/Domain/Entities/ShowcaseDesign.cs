@@ -1,34 +1,41 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
     public class ShowcaseDesign : BaseEntity
     {
-        public string Title { get; set; }             // "Living Room Serenbe, Georgia"
-        public string Location { get; set; }          // "Serenbe, Georgia"
-        public string ImageUrl { get; set; }          // Main image
+        public string Title { get; set; }
+        public string? Description { get; set; }
+        public string? Location { get; set; }
+        public string ImageUrl { get; set; }
 
-        // Categorization
-        public int RoomTypeId { get; set; }
-        public int DesignStyleId { get; set; }
+        public string RoomTypeId { get; set; }
+        public string DesignStyleId { get; set; }
+        public string UserId { get; set; }
 
-        // Display Flags
-        public bool IsPopular { get; set; }           // Show in Popular section?
-        public bool IsTrending { get; set; }          // Show in Trending?
+        public bool IsPopular { get; set; }
+        public bool IsTrending { get; set; }
 
-        // Stats
         public int ViewCount { get; set; }
-        public double AverageRating { get; set; }     // 7.5 shown on card
+        public double AverageRating { get; set; }
 
-        // Relations
         public RoomType RoomType { get; set; }
         public DesignStyle DesignStyle { get; set; }
-        public ICollection<Rating> Ratings { get; set; }
-        public ICollection<SavedDesign> SavedDesigns { get; set; }
+        public User User { get; set; }
+        public ICollection<Rating> Ratings { get; set; } = new List<Rating>();
+        public ICollection<SavedDesign> SavedDesigns { get; set; } = new List<SavedDesign>();
+
+        public ShowcaseDesign()
+        {
+            Title = string.Empty;
+            ImageUrl = string.Empty;
+            RoomTypeId = string.Empty;
+            DesignStyleId = string.Empty;
+            UserId = string.Empty;
+            RoomType = null!;
+            DesignStyle = null!;
+            User = null!;
+        }
     }
 
 }

@@ -1,0 +1,3632 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Decortee API",
+    "description": "Interior Design API",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/AIDesign": {
+      "get": {
+        "tags": [
+          "AIDesign"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AIDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AIDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AIDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "AIDesign"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAIDesignDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAIDesignDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAIDesignDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AIDesignResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AIDesignResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AIDesignResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AIDesign/{id}": {
+      "get": {
+        "tags": [
+          "AIDesign"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AIDesignResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AIDesignResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AIDesignResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AIDesign"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAIDesignDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAIDesignDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAIDesignDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AIDesignResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AIDesignResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AIDesignResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AIDesign"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AIDesign/user/{userId}": {
+      "get": {
+        "tags": [
+          "AIDesign"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AIDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AIDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AIDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Auth/Register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RejesterViewModle"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisterResponseViewModleGeneralResponseViewModle"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Auth/Login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginViewModle"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthViewModleGeneralResponseViewModle"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Auth/GoogleLogin": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GoogleLoginViewModle"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthViewModleGeneralResponseViewModle"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Auth/Profile": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileViewModleGeneralResponseViewModle"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Auth/ForgotPassword": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgotPasswordViewModle"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseViewModle"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseViewModle"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Auth/ResetPassword": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordViewModle"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseViewModle"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseViewModle"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ChatMessage/conversation/{conversationId}": {
+      "get": {
+        "tags": [
+          "ChatMessage"
+        ],
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatMessageResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatMessageResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatMessageResponseDtoIEnumerableGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ChatMessage": {
+      "post": {
+        "tags": [
+          "ChatMessage"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateChatMessageDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateChatMessageDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateChatMessageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatMessageResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatMessageResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatMessageResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ChatMessage/{id}": {
+      "delete": {
+        "tags": [
+          "ChatMessage"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Comment": {
+      "get": {
+        "tags": [
+          "Comment"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentResponseDtoIEnumerableGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Comment"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCommentDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCommentDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCommentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Comment/{id}": {
+      "get": {
+        "tags": [
+          "Comment"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Comment"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCommentDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCommentDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCommentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Comment"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Comment/post/{postId}": {
+      "get": {
+        "tags": [
+          "Comment"
+        ],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentResponseDtoIEnumerableGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DesignStyle": {
+      "get": {
+        "tags": [
+          "DesignStyle"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignStyleResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignStyleResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignStyleResponseDtoIEnumerableGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "DesignStyle"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDesignStyleDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDesignStyleDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDesignStyleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignStyleResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignStyleResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignStyleResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DesignStyle/{id}": {
+      "get": {
+        "tags": [
+          "DesignStyle"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignStyleResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignStyleResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignStyleResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DesignStyle"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDesignStyleDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDesignStyleDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDesignStyleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignStyleResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignStyleResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesignStyleResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DesignStyle"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Post": {
+      "get": {
+        "tags": [
+          "Post"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponseDtoIEnumerableGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Post"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePostDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePostDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePostDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Post/{id}": {
+      "get": {
+        "tags": [
+          "Post"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Post"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePostDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePostDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePostDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Post"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Post/{id}/with-comments": {
+      "get": {
+        "tags": [
+          "Post"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostWithCommentsDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostWithCommentsDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostWithCommentsDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Profile": {
+      "get": {
+        "tags": [
+          "Profile"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Profile"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProfileDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Profile/password": {
+      "put": {
+        "tags": [
+          "Profile"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Profile/upload-image": {
+      "post": {
+        "tags": [
+          "Profile"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "image": {
+                  "style": "form"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "image": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Profile/theme": {
+      "put": {
+        "tags": [
+          "Profile"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateThemeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Profile/language": {
+      "put": {
+        "tags": [
+          "Profile"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLanguageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Profile/posts": {
+      "get": {
+        "tags": [
+          "Profile"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Profile/ratings": {
+      "get": {
+        "tags": [
+          "Profile"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Rating": {
+      "get": {
+        "tags": [
+          "Rating"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatingResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatingResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatingResponseDtoIEnumerableGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Rating"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRatingDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRatingDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRatingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatingResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatingResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatingResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Rating/{id}": {
+      "get": {
+        "tags": [
+          "Rating"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatingResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatingResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatingResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Rating"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Rating/design/{showcaseDesignId}": {
+      "get": {
+        "tags": [
+          "Rating"
+        ],
+        "parameters": [
+          {
+            "name": "showcaseDesignId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatingResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatingResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatingResponseDtoIEnumerableGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/RoomType": {
+      "get": {
+        "tags": [
+          "RoomType"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomTypeResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomTypeResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomTypeResponseDtoIEnumerableGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "RoomType"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRoomTypeDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRoomTypeDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRoomTypeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomTypeResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomTypeResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomTypeResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/RoomType/{id}": {
+      "get": {
+        "tags": [
+          "RoomType"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomTypeResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomTypeResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomTypeResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RoomType"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRoomTypeDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRoomTypeDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRoomTypeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomTypeResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomTypeResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomTypeResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RoomType"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ShowcaseDesign": {
+      "get": {
+        "tags": [
+          "ShowcaseDesign"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ShowcaseDesign"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateShowcaseDesignDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateShowcaseDesignDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateShowcaseDesignDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ShowcaseDesign/{id}": {
+      "get": {
+        "tags": [
+          "ShowcaseDesign"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ShowcaseDesign"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateShowcaseDesignDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateShowcaseDesignDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateShowcaseDesignDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ShowcaseDesign"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ShowcaseDesign/by-room-type/{roomTypeId}": {
+      "get": {
+        "tags": [
+          "ShowcaseDesign"
+        ],
+        "parameters": [
+          {
+            "name": "roomTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ShowcaseDesign/by-style/{styleId}": {
+      "get": {
+        "tags": [
+          "ShowcaseDesign"
+        ],
+        "parameters": [
+          {
+            "name": "styleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ShowcaseDesign/popular": {
+      "get": {
+        "tags": [
+          "ShowcaseDesign"
+        ],
+        "parameters": [
+          {
+            "name": "take",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ShowcaseDesign/trending": {
+      "get": {
+        "tags": [
+          "ShowcaseDesign"
+        ],
+        "parameters": [
+          {
+            "name": "take",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ShowcaseDesign/filter": {
+      "get": {
+        "tags": [
+          "ShowcaseDesign"
+        ],
+        "parameters": [
+          {
+            "name": "RoomTypeId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "StyleId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPopular",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "IsTrending",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Vote": {
+      "get": {
+        "tags": [
+          "Vote"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoteResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoteResponseDtoIEnumerableGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoteResponseDtoIEnumerableGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Vote"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVoteDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVoteDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVoteDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoteResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoteResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoteResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Vote/{id}": {
+      "get": {
+        "tags": [
+          "Vote"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoteResponseDtoGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoteResponseDtoGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoteResponseDtoGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Vote"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanGeneralResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AIDesignResponseDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "OriginalImageUrl": {
+            "type": "string"
+          },
+          "GeneratedImageUrl": {
+            "type": "string"
+          },
+          "Prompt": {
+            "type": "string",
+            "nullable": true
+          },
+          "RoomTypeId": {
+            "type": "string"
+          },
+          "RoomTypeName": {
+            "type": "string"
+          },
+          "DesignStyleId": {
+            "type": "string"
+          },
+          "DesignStyleName": {
+            "type": "string"
+          },
+          "UserId": {
+            "type": "string"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AIDesignResponseDtoGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/AIDesignResponseDto"
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AIDesignResponseDtoIEnumerableGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AIDesignResponseDto"
+            }
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AuthViewModle": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "Email": {
+            "type": "string"
+          },
+          "Token": {
+            "type": "string"
+          },
+          "ExpiresIn": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AuthViewModleGeneralResponseViewModle": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/AuthViewModle"
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BooleanGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "type": "boolean"
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BooleanGeneralResponseViewModle": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "type": "boolean"
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChangePasswordDto": {
+        "type": "object",
+        "properties": {
+          "OldPassword": {
+            "type": "string"
+          },
+          "NewPassword": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChatMessageResponseDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "ConversationId": {
+            "type": "string"
+          },
+          "UserId": {
+            "type": "string"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "Content": {
+            "type": "string"
+          },
+          "IsFromUser": {
+            "type": "boolean"
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChatMessageResponseDtoGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/ChatMessageResponseDto"
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChatMessageResponseDtoIEnumerableGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChatMessageResponseDto"
+            }
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CommentResponseDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "PostId": {
+            "type": "string"
+          },
+          "UserId": {
+            "type": "string"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "Content": {
+            "type": "string"
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "UpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CommentResponseDtoGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/CommentResponseDto"
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CommentResponseDtoIEnumerableGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CommentResponseDto"
+            }
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateAIDesignDto": {
+        "type": "object",
+        "properties": {
+          "OriginalImageUrl": {
+            "type": "string"
+          },
+          "GeneratedImageUrl": {
+            "type": "string"
+          },
+          "Prompt": {
+            "type": "string",
+            "nullable": true
+          },
+          "RoomTypeId": {
+            "type": "string"
+          },
+          "DesignStyleId": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateChatMessageDto": {
+        "type": "object",
+        "properties": {
+          "ConversationId": {
+            "type": "string"
+          },
+          "Content": {
+            "type": "string"
+          },
+          "IsFromUser": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateCommentDto": {
+        "type": "object",
+        "properties": {
+          "PostId": {
+            "type": "string"
+          },
+          "Content": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateDesignStyleDto": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreatePostDto": {
+        "type": "object",
+        "properties": {
+          "Title": {
+            "type": "string"
+          },
+          "Content": {
+            "type": "string"
+          },
+          "ImageUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateRatingDto": {
+        "type": "object",
+        "properties": {
+          "ShowcaseDesignId": {
+            "type": "string"
+          },
+          "Value": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Review": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateRoomTypeDto": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateShowcaseDesignDto": {
+        "type": "object",
+        "properties": {
+          "Title": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          },
+          "ImageUrl": {
+            "type": "string"
+          },
+          "RoomTypeId": {
+            "type": "string"
+          },
+          "DesignStyleId": {
+            "type": "string"
+          },
+          "IsPopular": {
+            "type": "boolean"
+          },
+          "IsTrending": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateVoteDto": {
+        "type": "object",
+        "properties": {
+          "PostId": {
+            "type": "string"
+          },
+          "IsUpvote": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DesignStyleResponseDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DesignStyleResponseDtoGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/DesignStyleResponseDto"
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DesignStyleResponseDtoIEnumerableGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DesignStyleResponseDto"
+            }
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorType": {
+        "enum": [
+          0,
+          100,
+          101,
+          102,
+          103
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ForgotPasswordViewModle": {
+        "type": "object",
+        "properties": {
+          "Email": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GoogleLoginViewModle": {
+        "type": "object",
+        "properties": {
+          "Email": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "GoogleId": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginViewModle": {
+        "type": "object",
+        "properties": {
+          "Email": {
+            "type": "string"
+          },
+          "Password": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PostResponseDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "UserId": {
+            "type": "string"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "Title": {
+            "type": "string"
+          },
+          "Content": {
+            "type": "string"
+          },
+          "ImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "UpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "UpvoteCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "DownvoteCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "CommentCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PostResponseDtoGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/PostResponseDto"
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PostResponseDtoIEnumerableGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostResponseDto"
+            }
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PostWithCommentsDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "UserId": {
+            "type": "string"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "Title": {
+            "type": "string"
+          },
+          "Content": {
+            "type": "string"
+          },
+          "ImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "UpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "UpvoteCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "DownvoteCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CommentResponseDto"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "PostWithCommentsDtoGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/PostWithCommentsDto"
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProfileViewModle": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "Email": {
+            "type": "string"
+          },
+          "ProfilePicture": {
+            "type": "string",
+            "nullable": true
+          },
+          "Bio": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsDarkMode": {
+            "type": "boolean"
+          },
+          "Language": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProfileViewModleGeneralResponseViewModle": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/ProfileViewModle"
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RatingResponseDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "ShowcaseDesignId": {
+            "type": "string"
+          },
+          "UserId": {
+            "type": "string"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "Value": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Review": {
+            "type": "string",
+            "nullable": true
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RatingResponseDtoGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/RatingResponseDto"
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RatingResponseDtoIEnumerableGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RatingResponseDto"
+            }
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterResponseViewModle": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "Email": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterResponseViewModleGeneralResponseViewModle": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/RegisterResponseViewModle"
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RejesterViewModle": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Email": {
+            "type": "string"
+          },
+          "Password": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResetPasswordViewModle": {
+        "type": "object",
+        "properties": {
+          "Email": {
+            "type": "string"
+          },
+          "Otp": {
+            "type": "string"
+          },
+          "NewPassword": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomTypeResponseDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomTypeResponseDtoGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/RoomTypeResponseDto"
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomTypeResponseDtoIEnumerableGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoomTypeResponseDto"
+            }
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShowcaseDesignResponseDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "Title": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          },
+          "ImageUrl": {
+            "type": "string"
+          },
+          "RoomTypeId": {
+            "type": "string"
+          },
+          "RoomTypeName": {
+            "type": "string"
+          },
+          "DesignStyleId": {
+            "type": "string"
+          },
+          "DesignStyleName": {
+            "type": "string"
+          },
+          "UserId": {
+            "type": "string"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "IsPopular": {
+            "type": "boolean"
+          },
+          "IsTrending": {
+            "type": "boolean"
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "AverageRating": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShowcaseDesignResponseDtoGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/ShowcaseDesignResponseDto"
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShowcaseDesignResponseDtoIEnumerableGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShowcaseDesignResponseDto"
+            }
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateAIDesignDto": {
+        "type": "object",
+        "properties": {
+          "OriginalImageUrl": {
+            "type": "string"
+          },
+          "GeneratedImageUrl": {
+            "type": "string"
+          },
+          "Prompt": {
+            "type": "string",
+            "nullable": true
+          },
+          "RoomTypeId": {
+            "type": "string"
+          },
+          "DesignStyleId": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateCommentDto": {
+        "type": "object",
+        "properties": {
+          "Content": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateDesignStyleDto": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateLanguageDto": {
+        "type": "object",
+        "properties": {
+          "Language": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdatePostDto": {
+        "type": "object",
+        "properties": {
+          "Title": {
+            "type": "string"
+          },
+          "Content": {
+            "type": "string"
+          },
+          "ImageUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateProfileDto": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Email": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateRoomTypeDto": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateShowcaseDesignDto": {
+        "type": "object",
+        "properties": {
+          "Title": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          },
+          "ImageUrl": {
+            "type": "string"
+          },
+          "RoomTypeId": {
+            "type": "string"
+          },
+          "DesignStyleId": {
+            "type": "string"
+          },
+          "IsPopular": {
+            "type": "boolean"
+          },
+          "IsTrending": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateThemeDto": {
+        "type": "object",
+        "properties": {
+          "DarkMode": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VoteResponseDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "PostId": {
+            "type": "string"
+          },
+          "UserId": {
+            "type": "string"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "IsUpvote": {
+            "type": "boolean"
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VoteResponseDtoGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/VoteResponseDto"
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VoteResponseDtoIEnumerableGeneralResponseDto": {
+        "type": "object",
+        "properties": {
+          "Data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoteResponseDto"
+            }
+          },
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "Error": {
+            "$ref": "#/components/schemas/ErrorType"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

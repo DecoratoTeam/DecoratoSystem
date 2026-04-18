@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Infrastructure
@@ -15,274 +18,183 @@ namespace Infrastructure
             if (await context.RoomTypes.AnyAsync())
                 return;
 
-            // Seed RoomTypes
+            // ── 1. RoomTypes ────────────────────────────────────────────────
+            // IconUrl: first image per room type (assigned after we know the image list)
             var roomTypes = new List<RoomType>
             {
-                new() { Name = "Living Room", Description = "Main living and entertainment area" },
-                new() { Name = "Bedroom", Description = "Sleeping and relaxation space" },
-                new() { Name = "Kitchen", Description = "Cooking and meal preparation area" },
-                new() { Name = "Bathroom", Description = "Personal hygiene and grooming space" },
-                new() { Name = "Office", Description = "Work from home workspace" },
-                new() { Name = "Dining Room", Description = "Formal dining and gathering area" }
+                new() { Name = "Living Room", Description = "Main living and entertainment area",  IconUrl = "/static/interior-0.jpg"  },
+                new() { Name = "Bedroom",     Description = "Sleeping and relaxation space",       IconUrl = "/static/interior-7.jpg"  },
+                new() { Name = "Kitchen",     Description = "Cooking and meal preparation area",   IconUrl = "/static/interior-8.jpg"  },
+                new() { Name = "Bathroom",    Description = "Personal hygiene and grooming space", IconUrl = "/static/interior-20.jpg" },
+                new() { Name = "Office",      Description = "Work from home workspace",            IconUrl = "/static/interior-30.jpg" },
+                new() { Name = "Dining Room", Description = "Formal dining and gathering area",    IconUrl = "/static/interior-40.jpg" },
             };
             await context.RoomTypes.AddRangeAsync(roomTypes);
 
-            // Seed DesignStyles
+            // ── 2. DesignStyles ─────────────────────────────────────────────
             var designStyles = new List<DesignStyle>
             {
-                new() { Name = "Modern", Description = "Clean lines, minimal ornamentation, and functional design" },
-                new() { Name = "Minimalist", Description = "Simple, uncluttered spaces with essential elements only" },
-                new() { Name = "Rustic", Description = "Natural materials, warm tones, and countryside charm" },
-                new() { Name = "Industrial", Description = "Raw materials, exposed elements, and urban aesthetics" },
-                new() { Name = "Scandinavian", Description = "Light colors, natural materials, and cozy simplicity" },
-                new() { Name = "Traditional", Description = "Classic elegance, rich colors, and timeless appeal" }
+                new() { Name = "Modern",       Description = "Clean lines, minimal ornamentation, and functional design", PreviewImage = "/static/interior-0.jpg"  },
+                new() { Name = "Minimalist",   Description = "Simple, uncluttered spaces with essential elements only",   PreviewImage = "/static/interior-1.jpg"  },
+                new() { Name = "Rustic",       Description = "Natural materials, warm tones, and countryside charm",      PreviewImage = "/static/interior-2.jpg"  },
+                new() { Name = "Industrial",   Description = "Raw materials, exposed elements, and urban aesthetics",     PreviewImage = "/static/interior-3.jpg"  },
+                new() { Name = "Scandinavian", Description = "Light colors, natural materials, and cozy simplicity",     PreviewImage = "/static/interior-4.jpg"  },
+                new() { Name = "Traditional",  Description = "Classic elegance, rich colors, and timeless appeal",       PreviewImage = "/static/interior-5.jpg"  },
             };
             await context.DesignStyles.AddRangeAsync(designStyles);
 
-            // Seed sample Users (Phone removed)
+            // ── 3. Users ────────────────────────────────────────────────────
             var passwordHasher = new PasswordHasher<User>();
             var users = new List<User>
             {
-                new()
-                {
-                    Name = "Demo User",
-                    UserName = "demouser",
-                    Email = "demo@decorato.com",
-                    Role = Role.Customer
-                },
-                new()
-                {
-                    Name = "Admin User",
-                    UserName = "admin",
-                    Email = "admin@decorato.com",
-                    Role = Role.Admin
-                }
+                new() { Name = "Demo User",  UserName = "demouser", Email = "demo@decorato.com",  Role = Role.Customer },
+                new() { Name = "Admin User", UserName = "admin",    Email = "admin@decorato.com", Role = Role.Admin    },
             };
-
-            foreach (var user in users)
-            {
-                user.Password = passwordHasher.HashPassword(user, "Demo123!");
-            }
+            foreach (var u in users)
+                u.Password = passwordHasher.HashPassword(u, "Demo123!");
 
             await context.Users.AddRangeAsync(users);
             await context.SaveChangesAsync();
 
-            // Seed ShowcaseDesigns (10+ with mix of Popular/Trending)
-            var showcaseDesigns = new List<ShowcaseDesign>
+            // ── 4. ShowcaseDesigns – loaded from SeederData.json ────────────
+            var jsonPath = ResolveSeederJson();
+            var showcaseDesigns = new List<ShowcaseDesign>();
+
+            if (jsonPath != null)
             {
-                new()
+                var items = JsonSerializer.Deserialize<List<JsonElement>>(
+                    await File.ReadAllTextAsync(jsonPath)) ?? new();
+
+                foreach (var item in items)
                 {
-                    Title = "Modern Living Room Elegance",
-                    Description = "A sleek modern living room with clean lines and neutral tones",
-                    ImageUrl = "/static/showcase-modern-living.jpg",
-                    RoomTypeId = roomTypes[0].Id,
-                    DesignStyleId = designStyles[0].Id,
-                    UserId = users[0].Id,
-                    IsPopular = true,
-                    IsTrending = true
-                },
-                new()
-                {
-                    Title = "Minimalist Bedroom Retreat",
-                    Description = "A peaceful minimalist bedroom with essential furnishings",
-                    ImageUrl = "/static/showcase-minimal-bedroom.jpg",
-                    RoomTypeId = roomTypes[1].Id,
-                    DesignStyleId = designStyles[1].Id,
-                    UserId = users[0].Id,
-                    IsPopular = true,
-                    IsTrending = false
-                },
-                new()
-                {
-                    Title = "Rustic Kitchen Charm",
-                    Description = "A warm rustic kitchen with natural wood elements",
-                    ImageUrl = "/static/showcase-rustic-kitchen.jpg",
-                    RoomTypeId = roomTypes[2].Id,
-                    DesignStyleId = designStyles[2].Id,
-                    UserId = users[0].Id,
-                    IsPopular = false,
-                    IsTrending = true
-                },
-                new()
-                {
-                    Title = "Industrial Loft Office",
-                    Description = "An urban industrial home office with exposed brick",
-                    ImageUrl = "/static/showcase-industrial-office.jpg",
-                    RoomTypeId = roomTypes[4].Id,
-                    DesignStyleId = designStyles[3].Id,
-                    UserId = users[0].Id,
-                    IsPopular = true,
-                    IsTrending = true
-                },
-                new()
-                {
-                    Title = "Scandinavian Bathroom Spa",
-                    Description = "A light and airy Scandinavian bathroom design",
-                    ImageUrl = "/static/showcase-scandi-bathroom.jpg",
-                    RoomTypeId = roomTypes[3].Id,
-                    DesignStyleId = designStyles[4].Id,
-                    UserId = users[0].Id,
-                    IsPopular = true,
-                    IsTrending = false
-                },
-                new()
-                {
-                    Title = "Traditional Dining Elegance",
-                    Description = "A classic traditional dining room with rich wood tones",
-                    ImageUrl = "/static/showcase-traditional-dining.jpg",
-                    RoomTypeId = roomTypes[5].Id,
-                    DesignStyleId = designStyles[5].Id,
-                    UserId = users[0].Id,
-                    IsPopular = false,
-                    IsTrending = true
-                },
-                new()
-                {
-                    Title = "Modern Kitchen Innovation",
-                    Description = "A contemporary kitchen with smart storage solutions",
-                    ImageUrl = "/static/showcase-modern-kitchen.jpg",
-                    RoomTypeId = roomTypes[2].Id,
-                    DesignStyleId = designStyles[0].Id,
-                    UserId = users[1].Id,
-                    IsPopular = true,
-                    IsTrending = true
-                },
-                new()
-                {
-                    Title = "Minimalist Office Focus",
-                    Description = "A distraction-free minimalist workspace",
-                    ImageUrl = "/static/showcase-minimal-office.jpg",
-                    RoomTypeId = roomTypes[4].Id,
-                    DesignStyleId = designStyles[1].Id,
-                    UserId = users[1].Id,
-                    IsPopular = false,
-                    IsTrending = false
-                },
-                new()
-                {
-                    Title = "Industrial Living Space",
-                    Description = "A bold industrial living room with metal accents",
-                    ImageUrl = "/static/showcase-industrial-living.jpg",
-                    RoomTypeId = roomTypes[0].Id,
-                    DesignStyleId = designStyles[3].Id,
-                    UserId = users[1].Id,
-                    IsPopular = true,
-                    IsTrending = false
-                },
-                new()
-                {
-                    Title = "Scandinavian Bedroom Bliss",
-                    Description = "A cozy Scandinavian bedroom with natural textures",
-                    ImageUrl = "/static/showcase-scandi-bedroom.jpg",
-                    RoomTypeId = roomTypes[1].Id,
-                    DesignStyleId = designStyles[4].Id,
-                    UserId = users[1].Id,
-                    IsPopular = false,
-                    IsTrending = true
-                },
-                new()
-                {
-                    Title = "Rustic Bathroom Retreat",
-                    Description = "A charming rustic bathroom with stone elements",
-                    ImageUrl = "/static/showcase-rustic-bathroom.jpg",
-                    RoomTypeId = roomTypes[3].Id,
-                    DesignStyleId = designStyles[2].Id,
-                    UserId = users[0].Id,
-                    IsPopular = true,
-                    IsTrending = true
+                    var roomName  = item.GetProperty("room").GetString()  ?? "Living Room";
+                    var styleName = item.GetProperty("style").GetString() ?? "Modern";
+                    var roomType  = roomTypes.FirstOrDefault(r => r.Name == roomName)    ?? roomTypes[0];
+                    var styleType = designStyles.FirstOrDefault(s => s.Name == styleName) ?? designStyles[0];
+                    var idx       = item.GetProperty("index").GetInt32();
+
+                    showcaseDesigns.Add(new ShowcaseDesign
+                    {
+                        Title         = item.GetProperty("description").GetString() ?? $"Design #{idx}",
+                        Description   = item.GetProperty("description").GetString() ?? "",
+                        ImageUrl      = item.GetProperty("file").GetString()        ?? $"/static/interior-{idx}.jpg",
+                        RoomTypeId    = roomType.Id,
+                        DesignStyleId = styleType.Id,
+                        UserId        = (idx % 2 == 0) ? users[0].Id : users[1].Id,
+                        IsPopular     = item.GetProperty("popular").GetBoolean(),
+                        IsTrending    = item.GetProperty("trending").GetBoolean(),
+                        AverageRating = item.GetProperty("rating").GetDouble(),
+                        ViewCount     = item.GetProperty("views").GetInt32(),
+                    });
                 }
-            };
+
+                // back-fill IconUrl / PreviewImage with real images by category
+                UpdateRoomTypeIcons(roomTypes, showcaseDesigns);
+                UpdateStylePreviews(designStyles, showcaseDesigns);
+                context.RoomTypes.UpdateRange(roomTypes);
+                context.DesignStyles.UpdateRange(designStyles);
+            }
+            else
+            {
+                // Fallback: 30 generic designs when JSON is missing
+                var rng  = new Random(42);
+                var adj  = new[] { "Elegant","Cozy","Luxury","Chic","Serene","Bold","Timeless","Fresh","Warm","Sleek" };
+                var rmCy = new[] { "Living Room","Bedroom","Kitchen","Bathroom","Office","Dining Room" };
+                var stCy = new[] { "Modern","Minimalist","Rustic","Industrial","Scandinavian","Traditional" };
+                for (int i = 0; i < 30; i++)
+                {
+                    var rt = roomTypes.FirstOrDefault(r => r.Name == rmCy[i % 6])    ?? roomTypes[i % 6];
+                    var st = designStyles.FirstOrDefault(s => s.Name == stCy[i % 6]) ?? designStyles[i % 6];
+                    showcaseDesigns.Add(new ShowcaseDesign
+                    {
+                        Title         = $"{adj[i % adj.Length]} {rmCy[i % 6]} Design",
+                        Description   = $"A beautiful {stCy[i % 6].ToLower()} {rmCy[i % 6].ToLower()} design.",
+                        ImageUrl      = $"/static/interior-{i}.jpg",
+                        RoomTypeId    = rt.Id,
+                        DesignStyleId = st.Id,
+                        UserId        = (i % 2 == 0) ? users[0].Id : users[1].Id,
+                        IsPopular     = i < 8,
+                        IsTrending    = i % 4 == 0,
+                        AverageRating = Math.Round(rng.NextDouble() * 3 + 7, 1),
+                        ViewCount     = rng.Next(200, 8000),
+                    });
+                }
+            }
+
             await context.ShowcaseDesigns.AddRangeAsync(showcaseDesigns);
 
-            // Seed Posts
+            // ── 5. Posts ─────────────────────────────────────────────────────
             var posts = new List<Post>
             {
-                new()
-                {
-                    Title = "My Living Room Transformation",
-                    Content = "Just finished redesigning my living room with a modern aesthetic. The clean lines and neutral palette create such a calming atmosphere!",
-                    ImageUrl = "/static/post-living-transform.jpg",
-                    UserId = users[0].Id
-                },
-                new()
-                {
-                    Title = "Tips for Small Space Design",
-                    Content = "Living in a small apartment? Here are my top tips for maximizing space while maintaining style...",
-                    ImageUrl = "/static/post-small-space.jpg",
-                    UserId = users[0].Id
-                },
-                new()
-                {
-                    Title = "Industrial vs Modern: Which is Right for You?",
-                    Content = "Comparing two popular design styles and helping you decide which fits your lifestyle better.",
-                    ImageUrl = "/static/post-style-compare.jpg",
-                    UserId = users[1].Id
-                }
+                new() { Title = "My Living Room Transformation",         Content = "Just finished redesigning my living room with a modern aesthetic. The clean lines and neutral palette create such a calming atmosphere!", ImageUrl = "/static/interior-0.jpg",  UserId = users[0].Id },
+                new() { Title = "Tips for Small Space Design",           Content = "Living in a small apartment? Here are my top tips for maximizing space while maintaining style...",                                       ImageUrl = "/static/interior-10.jpg", UserId = users[0].Id },
+                new() { Title = "Industrial vs Modern: Which is Right?", Content = "Comparing two popular design styles and helping you decide which fits your lifestyle better.",                                           ImageUrl = "/static/interior-20.jpg", UserId = users[1].Id },
             };
             await context.Posts.AddRangeAsync(posts);
             await context.SaveChangesAsync();
 
-            // Seed Comments
-            var comments = new List<Comment>
+            // ── 6. Comments ───────────────────────────────────────────────────
+            await context.Comments.AddRangeAsync(new List<Comment>
             {
-                new()
-                {
-                    PostId = posts[0].Id,
-                    UserId = users[1].Id,
-                    Content = "This looks amazing! What paint color did you use?"
-                },
-                new()
-                {
-                    PostId = posts[0].Id,
-                    UserId = users[0].Id,
-                    Content = "Thank you! It's Benjamin Moore Simply White."
-                },
-                new()
-                {
-                    PostId = posts[1].Id,
-                    UserId = users[1].Id,
-                    Content = "Great tips! The mirror trick really works."
-                }
-            };
-            await context.Comments.AddRangeAsync(comments);
+                new() { PostId = posts[0].Id, UserId = users[1].Id, Content = "This looks amazing! What paint color did you use?" },
+                new() { PostId = posts[0].Id, UserId = users[0].Id, Content = "Thank you! It's Benjamin Moore Simply White." },
+                new() { PostId = posts[1].Id, UserId = users[1].Id, Content = "Great tips! The mirror trick really works." },
+            });
 
-            // Seed Ratings
-            var ratings = new List<Rating>
+            // ── 7. Ratings ────────────────────────────────────────────────────
+            if (showcaseDesigns.Count >= 4)
             {
-                new()
+                await context.Ratings.AddRangeAsync(new List<Rating>
                 {
-                    ShowcaseDesignId = showcaseDesigns[0].Id,
-                    UserId = users[1].Id,
-                    Value = 5,
-                    Review = "Absolutely stunning design! Love the color palette."
-                },
-                new()
-                {
-                    ShowcaseDesignId = showcaseDesigns[1].Id,
-                    UserId = users[1].Id,
-                    Value = 4,
-                    Review = "Very peaceful and calming. Great for relaxation."
-                },
-                new()
-                {
-                    ShowcaseDesignId = showcaseDesigns[3].Id,
-                    UserId = users[0].Id,
-                    Value = 5,
-                    Review = "Perfect workspace inspiration!"
-                }
-            };
-            await context.Ratings.AddRangeAsync(ratings);
+                    new() { ShowcaseDesignId = showcaseDesigns[0].Id, UserId = users[1].Id, Value = 5, Review = "Absolutely stunning design! Love the color palette." },
+                    new() { ShowcaseDesignId = showcaseDesigns[1].Id, UserId = users[1].Id, Value = 4, Review = "Very peaceful and calming. Great for relaxation."    },
+                    new() { ShowcaseDesignId = showcaseDesigns[3].Id, UserId = users[0].Id, Value = 5, Review = "Perfect workspace inspiration!"                       },
+                });
+            }
 
-            // Seed Votes
-            var votes = new List<Vote>
+            // ── 8. Votes ──────────────────────────────────────────────────────
+            await context.Votes.AddRangeAsync(new List<Vote>
             {
                 new() { PostId = posts[0].Id, UserId = users[1].Id, IsUpvote = true },
                 new() { PostId = posts[1].Id, UserId = users[1].Id, IsUpvote = true },
-                new() { PostId = posts[2].Id, UserId = users[0].Id, IsUpvote = true }
-            };
-            await context.Votes.AddRangeAsync(votes);
+                new() { PostId = posts[2].Id, UserId = users[0].Id, IsUpvote = true },
+            });
 
             await context.SaveChangesAsync();
+        }
+
+        // ── Helpers ───────────────────────────────────────────────────────────
+
+        /// Finds SeederData.json next to the exe or 4 levels up (dev mode).
+        private static string? ResolveSeederJson()
+        {
+            var candidates = new[]
+            {
+                Path.Combine(AppContext.BaseDirectory, "SeederData.json"),
+                Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,
+                    "../../../../Persistence/Infrastructure/SeederData.json")),
+            };
+            return candidates.FirstOrDefault(File.Exists);
+        }
+
+        /// Assigns the first image found per room to that room's IconUrl.
+        private static void UpdateRoomTypeIcons(List<RoomType> roomTypes, List<ShowcaseDesign> designs)
+        {
+            foreach (var rt in roomTypes)
+            {
+                var first = designs.FirstOrDefault(d => d.RoomTypeId == rt.Id);
+                if (first != null) rt.IconUrl = first.ImageUrl;
+            }
+        }
+
+        /// Assigns the first image found per style to that style's PreviewImage.
+        private static void UpdateStylePreviews(List<DesignStyle> styles, List<ShowcaseDesign> designs)
+        {
+            foreach (var st in styles)
+            {
+                var first = designs.FirstOrDefault(d => d.DesignStyleId == st.Id);
+                if (first != null) st.PreviewImage = first.ImageUrl;
+            }
         }
     }
 }

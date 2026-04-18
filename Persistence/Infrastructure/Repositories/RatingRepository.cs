@@ -8,18 +8,36 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    public class RatingRepository(DecorteeDbContext dbContext) : GenericRepository<Rating>(dbContext), IRatingRepository
+    public class RatingRepository(DecorteeDbContext dbContext) 
+        : GenericRepository<Rating>(dbContext), IRatingRepository
     {
-        public async Task<Rating?> GetByUserAndDesignAsync(string userId, string showcaseDesignId, CancellationToken cancellationToken = default)
-        {
-            return await _dbSet.FirstOrDefaultAsync(r => r.UserId == userId && r.ShowcaseDesignId == showcaseDesignId, cancellationToken);
-        }
-
-        public async Task<IEnumerable<Rating>> GetByDesignIdAsync(string showcaseDesignId, CancellationToken cancellationToken = default)
+        public async Task<Rating?> GetByUserAndDesignAsync(
+            string userId, string showcaseDesignId, CancellationToken cancellationToken = default)
         {
             return await _dbSet
                 .Include(r => r.User)
+                .Include(r => r.ShowcaseDesign)
+                .FirstOrDefaultAsync(
+                    r => r.UserId == userId && r.ShowcaseDesignId == showcaseDesignId, 
+                    cancellationToken);
+        }
+
+        public async Task<IEnumerable<Rating>> GetByDesignIdAsync(
+            string showcaseDesignId, CancellationToken cancellationToken = default)
+        {
+            return await _dbSet
+                .Include(r => r.User)
+                .Include(r => r.ShowcaseDesign)
                 .Where(r => r.ShowcaseDesignId == showcaseDesignId)
+                .OrderByDescending(r => r.CreatedAt)
+                .ToListAsync(cancellationToken);
+        }
+
+        public async Task<IEnumerable<Rating>> GetByUserIdAsync(string userId, CancellationToken cancellationToken = default)
+        {
+            return await _dbSet
+                .Include(r => r.ShowcaseDesign)
+                .Where(r => r.UserId == userId)
                 .OrderByDescending(r => r.CreatedAt)
                 .ToListAsync(cancellationToken);
         }

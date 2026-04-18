@@ -5,16 +5,17 @@ namespace DecorteeSystem.MiddleWare
     public class TransactionMiddleware : IMiddleware
     {
         private readonly DecorteeDbContext _context;
+        
         public TransactionMiddleware(DecorteeDbContext context)
         {
             _context = context;
         }
+        
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
-            //for get endpoints
+            // Skip transaction for GET requests
             if (context.Request.Method.Equals("GET", StringComparison.OrdinalIgnoreCase))
             {
-                // Skip transaction for GET requests
                 await next(context);
                 return;
             }
