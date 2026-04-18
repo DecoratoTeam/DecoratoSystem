@@ -38,8 +38,65 @@ namespace Application.Services.Implementation
                     return GeneralResponseDto<AuthDto>.Success(authDto);
                 }
             }
-            
+
             return GeneralResponseDto<AuthDto>.Fail(ErrorType.InvalidCredentials, "Invalid email/password");
+        }
+
+        public async Task<GeneralResponseDto<AuthDto>> GoogleLoginAsync(GoogleLoginDto googleLoginDto, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrWhiteSpace(googleLoginDto.Email) || string.IsNullOrWhiteSpace(googleLoginDto.GoogleId))
+            {
+                return GeneralResponseDto<AuthDto>.Fail(ErrorType.InvalidCredentials, "Google login data is invalid");
+            }
+
+            var user = await _authRepository.FindUserByEmail(googleLoginDto.Email, cancellationToken);
+
+            if (user is null)
+            {
+                user = new User
+                {
+                    Name = string.IsNullOrWhiteSpace(googleLoginDto.Name) ? googleLoginDto.Email.Split('@')[0] : googleLoginDto.Name,
+                    UserName = googleLoginDto.Email.Split('@')[0],
+                    Email = googleLoginDto.Email,
+                    GoogleId = googleLoginDto.GoogleId,
+                    Password = Guid.NewGuid().ToString("N")
+                };
+
+                await _authRepository.RegisterAsync(user, cancellationToken);
+            }
+            else
+            {
+                user.GoogleId = googleLoginDto.GoogleId;
+                if (string.IsNullOrWhiteSpace(user.UserName))
+                {
+                    user.UserName = user.Email.Split('@')[0];
+                }
+                await _authRepository.UpdateUserAsync(user, cancellationToken);
+            }
+
+            var (token, expiresIn) = _jwtProvider.GenerateJwtToken(user);
+            return GeneralResponseDto<AuthDto>.Success(new AuthDto(user.Id, user.UserName, user.Email, token, expiresIn));
+        }
+
+        public async Task<GeneralResponseDto<ProfileDto>> GetProfileAsync(string userId, CancellationToken cancellationToken)
+        {
+            var user = await _authRepository.FindUserById(userId, cancellationToken);
+            if (user is null)
+            {
+                return GeneralResponseDto<ProfileDto>.Fail(ErrorType.NotFound, "User not found");
+            }
+
+            var profile = new ProfileDto(
+                user.Id,
+                user.Name,
+                user.UserName,
+                user.Email,
+                user.ProfilePicture,
+                user.Bio,
+                user.IsDarkMode,
+                user.Language);
+
+            return GeneralResponseDto<ProfileDto>.Success(profile);
         }
 
         // ✅ Register without Token
@@ -52,10 +109,10 @@ namespace Application.Services.Implementation
             }
 
             var user = rejesterDto.Adapt<User>();
-            
+
             // Generate UserName from Email (take part before @)
             user.UserName = rejesterDto.Email.Split('@')[0];
-            
+
             await _authRepository.RegisterAsync(user, cancellationToken);
 
             // ✅ Return user data WITHOUT token
@@ -67,7 +124,7 @@ namespace Application.Services.Implementation
         public async Task<GeneralResponseDto<bool>> ForgotPasswordAsync(ForgotPasswordDto forgotPasswordDto, CancellationToken cancellationToken)
         {
             var user = await _authRepository.FindUserByEmail(forgotPasswordDto.Email, cancellationToken);
-            
+
             if (user == null)
             {
                 return GeneralResponseDto<bool>.Fail(ErrorType.NotFound, "User with this email does not exist");
@@ -96,7 +153,7 @@ namespace Application.Services.Implementation
         public async Task<GeneralResponseDto<bool>> ResetPasswordAsync(ResetPasswordDto resetPasswordDto, CancellationToken cancellationToken)
         {
             var user = await _authRepository.FindUserByEmail(resetPasswordDto.Email, cancellationToken);
-            
+
             if (user == null)
             {
                 return GeneralResponseDto<bool>.Fail(ErrorType.NotFound, "User with this email does not exist");
@@ -116,7 +173,7 @@ namespace Application.Services.Implementation
 
             // Hash and update password
             user.Password = new PasswordHasher<User>().HashPassword(user, resetPasswordDto.NewPassword);
-            
+
             // Clear OTP after successful password reset
             user.Otp = null;
             user.OtpExpiry = null;

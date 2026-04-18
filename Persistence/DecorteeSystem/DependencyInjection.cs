@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
+using System.Text;
 using FluentValidation;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using Microsoft.OpenApi.Models;
@@ -41,6 +42,31 @@ namespace DecorteeSystem
                     Version = "v1",
                     Description = "Interior Design API"
                 });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Enter JWT token as: Bearer {your token}"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
                 
                 c.SupportNonNullableReferenceTypes();
             });
@@ -62,6 +88,8 @@ namespace DecorteeSystem
             services.AddScoped<IAuthRepository, AuthRepositor>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProfileService, ProfileService>();
 
             // Generic Repository
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -76,6 +104,7 @@ namespace DecorteeSystem
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IRatingRepository, RatingRepository>();
             services.AddScoped<IChatMessageRepository, ChatMessageRepository>();
+            services.AddScoped<IAuthRepository, AuthRepositor>();
 
             // Services
             services.AddScoped<IRoomTypeService, RoomTypeService>();
@@ -87,6 +116,8 @@ namespace DecorteeSystem
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IRatingService, RatingService>();
             services.AddScoped<IChatMessageService, ChatMessageService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IEmailService, EmailService>();
 
             return services;
         }
@@ -94,34 +125,29 @@ namespace DecorteeSystem
         public static IServiceCollection AddAuthConfig(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<IjwtProvider, JwtProvider>();
+            services.AddOptions<JwtOptions>().BindConfiguration(JwtOptions.SectionName);
 
-            services.AddOptions<JwtOptions>()
-                .BindConfiguration(JwtOptions.SectionName);
+            var jwtOptions = configuration.GetSection(JwtOptions.SectionName).Get<JwtOptions>()
+                ?? throw new InvalidOperationException("JWT configuration is missing");
 
-            var jwtOptions = configuration.GetSection(JwtOptions.SectionName).Get<JwtOptions>();
-            
-            if (jwtOptions == null)
-                throw new InvalidOperationException("JWT options are not configured properly.");
-
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(options =>
-            {
-                options.SaveToken = true;
-                options.TokenValidationParameters = new TokenValidationParameters
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
                 {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidateLifetime = true,
-                    ValidIssuer = jwtOptions.Issuer,
-                    ValidAudience = jwtOptions.Audience,
-                };
-            });
-            
+                    options.RequireHttpsMetadata = false;
+                    options.SaveToken = true;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Key)),
+                        ValidateIssuer = true,
+                        ValidIssuer = jwtOptions.Issuer,
+                        ValidateAudience = true,
+                        ValidAudience = jwtOptions.Audience,
+                        ValidateLifetime = true,
+                        ClockSkew = TimeSpan.Zero
+                    };
+                });
+
             return services;
         }
 
@@ -129,7 +155,7 @@ namespace DecorteeSystem
         {
             var mappingConfig = TypeAdapterConfig.GlobalSettings;
             mappingConfig.Scan(Assembly.GetExecutingAssembly());
-
+            
             services.AddSingleton<IMapper>(new Mapper(mappingConfig));
             return services;
         }

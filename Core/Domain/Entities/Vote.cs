@@ -1,21 +1,21 @@
 namespace Domain.Entities
 {
-    public class Vote
+    public class Vote : BaseEntity
     {
-        public string Id { get; set; }
-        public bool IsUpvote { get; set; }
-        public DateTime CreatedAt { get; set; }
-
         public string PostId { get; set; }
-        public Post Post { get; set; }
-
         public string UserId { get; set; }
+        public bool IsUpvote { get; set; }                      // true = ↑, false = ↓
+        
+        // Relations
+        public Post Post { get; set; }
         public User User { get; set; }
 
         public Vote()
         {
-            Id = Guid.NewGuid().ToString();
-            CreatedAt = DateTime.UtcNow;
+            PostId = string.Empty;
+            UserId = string.Empty;
+            Post = null!;
+            User = null!;
         }
     }
 }

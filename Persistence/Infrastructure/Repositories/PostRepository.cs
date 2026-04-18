@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    public class PostRepository(DecorteeDbContext dbContext) : GenericRepository<Post>(dbContext), IPostRepository
+    public class PostRepository(DecorteeDbContext dbContext) 
+        : GenericRepository<Post>(dbContext), IPostRepository
     {
-        public async Task<Post?> GetWithCommentsAsync(string id, CancellationToken cancellationToken = default)
+        public async Task<Post?> GetWithCommentsAsync(string id, 
+            CancellationToken cancellationToken = default)
         {
             return await _dbSet
                 .Include(p => p.User)
@@ -20,7 +22,8 @@ namespace Infrastructure.Repositories
                 .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
         }
 
-        public async Task<Post?> GetWithVotesAsync(string id, CancellationToken cancellationToken = default)
+        public async Task<Post?> GetWithVotesAsync(string id, 
+            CancellationToken cancellationToken = default)
         {
             return await _dbSet
                 .Include(p => p.User)
@@ -28,7 +31,8 @@ namespace Infrastructure.Repositories
                 .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
         }
 
-        public async Task<Post?> GetWithDetailsAsync(string id, CancellationToken cancellationToken = default)
+        public async Task<Post?> GetWithDetailsAsync(string id, 
+            CancellationToken cancellationToken = default)
         {
             return await _dbSet
                 .Include(p => p.User)
@@ -37,7 +41,8 @@ namespace Infrastructure.Repositories
                 .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
         }
 
-        public async Task<IEnumerable<Post>> GetByUserIdAsync(string userId, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Post>> GetByUserIdAsync(string userId, 
+            CancellationToken cancellationToken = default)
         {
             return await _dbSet
                 .Include(p => p.User)
@@ -48,7 +53,8 @@ namespace Infrastructure.Repositories
                 .ToListAsync(cancellationToken);
         }
 
-        public async Task<IEnumerable<Post>> GetAllWithDetailsAsync(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Post>> GetAllWithDetailsAsync(
+            CancellationToken cancellationToken = default)
         {
             return await _dbSet
                 .Include(p => p.User)

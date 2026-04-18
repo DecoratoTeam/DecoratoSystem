@@ -5,14 +5,55 @@
     <projectFile profileName="http">Persistence/DecorteeSystem/DecorteeSystem.csproj</projectFile>
     <projectFile profileName="https">Persistence/DecorteeSystem/DecorteeSystem.csproj</projectFile>
     <projectFile pubXmlPath="Persistence/DecorteeSystem/Properties/PublishProfiles/site51856-WebDeploy.pubxml">Persistence/DecorteeSystem/DecorteeSystem.csproj</projectFile>
+    <projectFile pubXmlPath="Persistence/DecorteeSystem/Properties/PublishProfiles/site58935-WebDeploy.pubxml">Persistence/DecorteeSystem/DecorteeSystem.csproj</projectFile>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f25b1f02-9ee3-4e9c-9440-8f3142eef2dc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Core/Application/Services/Implementation/EmailService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Services/Implementation/EmailService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.DecorteeSystem/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DecorteeSystem/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Authntication/IjwtProvider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Authntication/IjwtProvider.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Authntication/JwtProvider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Authntication/JwtProvider.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Dtos/GeneralResponseDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Dtos/GeneralResponseDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Dtos/Rating/CreateRatingDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Dtos/Rating/CreateRatingDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Services/Implementation/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Services/Implementation/AuthService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Services/Implementation/RatingService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Services/Implementation/RatingService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Services/Interfaces/IAuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Services/Interfaces/IAuthService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Services/Interfaces/IRatingService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Services/Interfaces/IRatingService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Domain/Entities/AIDesign.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Entities/AIDesign.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Domain/Entities/BaseEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Entities/BaseEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Domain/Entities/ChatMessage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Entities/ChatMessage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Domain/Entities/Comment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Entities/Comment.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Domain/Entities/DesignStyle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Entities/DesignStyle.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Domain/Entities/Post.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Entities/Post.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Domain/Entities/Rating.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Entities/Rating.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Domain/Entities/RoomType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Entities/RoomType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Domain/Entities/SavedDesign.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Entities/SavedDesign.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Domain/Entities/ShowcaseDesign.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Entities/ShowcaseDesign.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Domain/Entities/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Entities/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Domain/Entities/Vote.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Entities/Vote.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Domain/Enums/Role.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Enums/Role.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/DecorteeSystem/Controllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/DecorteeSystem/Controllers/AuthController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/DecorteeSystem/Controllers/RatingController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/DecorteeSystem/Controllers/RatingController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/DecorteeSystem/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/DecorteeSystem/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/DecorteeSystem/MiddleWare/TransactionMiddleware.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/DecorteeSystem/MiddleWare/TransactionMiddleware.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/DecorteeSystem/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/DecorteeSystem/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Persistence/DecorteeSystem/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/DecorteeSystem/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/Infrastructure/DecorteeDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/Infrastructure/DecorteeDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/Infrastructure/Migrations/20251013214511_IntialCreate.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/Infrastructure/Migrations/20251013214511_IntialCreate.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/Infrastructure/Migrations/20251018171246_AddOtpToUser.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/Infrastructure/Migrations/20251018171246_AddOtpToUser.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/Infrastructure/Migrations/20260128194535_InitialCreate.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/Infrastructure/Migrations/20260128194535_InitialCreate.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/Infrastructure/Migrations/20260129120719_ctreateDatabase.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/Infrastructure/Migrations/20260129120719_ctreateDatabase.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/Infrastructure/Migrations/DecorteeDbContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/Infrastructure/Repositories/AuthRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/Infrastructure/Repositories/AuthRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/Infrastructure/Repositories/GenericRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/Infrastructure/Repositories/GenericRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/Infrastructure/Repositories/PostRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/Infrastructure/Repositories/PostRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistence/Infrastructure/Repositories/RatingRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Persistence/Infrastructure/Repositories/RatingRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,35 +66,43 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="38i9v0MjrhiT06C7eJ7bPJuSiZG" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.DecorteeSystem: IIS Express.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "junie.onboarding.icon.badge.shown": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.DecorteeSystem: IIS Express.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.DecorteeSystem: IIS Express">
     <configuration name="DecorteeSystem: site51856-WebDeploy" type="DotNetMsBuildPublish" factoryName="Publish to IIS">
       <riderPublish configuration="Release" platform="Any CPU" publish_profile="site51856-WebDeploy.pubxml" pubxml_path="$PROJECT_DIR$/Persistence/DecorteeSystem/Properties/PublishProfiles/site51856-WebDeploy.pubxml" user_name="site51856" uuid_high="472541103804533819" uuid_low="-9067298738782977094" />
+      <method v="2" />
+    </configuration>
+    <configuration name="DecorteeSystem: site58935-WebDeploy" type="DotNetMsBuildPublish" factoryName="Publish to IIS">
+      <riderPublish configuration="Release" platform="Any CPU" publish_profile="site58935-WebDeploy.pubxml" pubxml_path="$PROJECT_DIR$/Persistence/DecorteeSystem/Properties/PublishProfiles/site58935-WebDeploy.pubxml" user_name="site58935" uuid_high="472541103804533819" uuid_low="-9067298738782977094" />
       <method v="2" />
     </configuration>
     <configuration name="DecorteeSystem: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
@@ -113,6 +162,10 @@
       <option name="presentableId" value="Default" />
       <updated>1769271755869</updated>
       <workItem from="1769271761358" duration="3749000" />
+      <workItem from="1773508909939" duration="80000" />
+      <workItem from="1773509200733" duration="74000" />
+      <workItem from="1773509296632" duration="255000" />
+      <workItem from="1773509592115" duration="14000" />
     </task>
     <servers />
   </component>

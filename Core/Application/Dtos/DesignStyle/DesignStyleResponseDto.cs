@@ -1,4 +1,4 @@
 namespace Application.Dtos.DesignStyle
 {
-    public record DesignStyleResponseDto(string Id, string Name, string? Description);
+    public record DesignStyleResponseDto(string Id, string Name, string? Description, string? PreviewImage);
 }

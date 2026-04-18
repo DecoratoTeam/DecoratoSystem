@@ -18,15 +18,17 @@ namespace Application.Authntication
         public (string Token, int ExpiersIn) GenerateJwtToken(User user)
         {
             Claim[] claims = [
-                new(ClaimTypes.NameIdentifier,user.Id),
-                new(ClaimTypes.Name,user.Name),
-                new(ClaimTypes.Email,user.Email),
-                new(ClaimTypes.Role,((int)user.Role).ToString())
-                ];
+                new(ClaimTypes.NameIdentifier, user.Id),
+                new(ClaimTypes.Name, user.Name),
+                new(ClaimTypes.Email, user.Email),
+                new(ClaimTypes.Role, ((int)user.Role).ToString())
+            ];
 
-            var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Key));
+            var symmetricSecurityKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(_jwtOptions.Key));
 
-            var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
+            var signingCredentials = new SigningCredentials(
+                symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
                 issuer: _jwtOptions.Issuer,
@@ -36,8 +38,8 @@ namespace Application.Authntication
                 expires: DateTime.UtcNow.AddMinutes(_jwtOptions.ExpiryMinutes)
                 );
 
-
-            return (new JwtSecurityTokenHandler().WriteToken(token), _jwtOptions.ExpiryMinutes * 60);
+            return (new JwtSecurityTokenHandler().WriteToken(token), 
+                    _jwtOptions.ExpiryMinutes * 60);
         }
     }
 }

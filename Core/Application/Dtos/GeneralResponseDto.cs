@@ -8,11 +8,12 @@ namespace Application.Dtos
 {
     public class GeneralResponseDto<T>
     {
-        public static GeneralResponseDto<T> Success(T data) => new() { Data = data, IsSuccess = true, Message = string.Empty };
+        public static GeneralResponseDto<T> Success(T data) 
+            => new() { Data = data, IsSuccess = true, Message = string.Empty };
 
-        public static GeneralResponseDto<T> Success() => new() { IsSuccess = true, Message = string.Empty };
+        public static GeneralResponseDto<T> Success() 
+            => new() { IsSuccess = true, Message = string.Empty };
 
-        // Error constructors
         public static GeneralResponseDto<T> Fail(ErrorType type, string message)
             => new() { Error = type, IsSuccess = false, Message = message };
 

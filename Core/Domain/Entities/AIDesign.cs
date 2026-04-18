@@ -1,26 +1,31 @@
+using System.Collections.Generic;
+
 namespace Domain.Entities
 {
-    public class AIDesign
+    public class AIDesign : BaseEntity
     {
-        public string Id { get; set; }
+        public string UserId { get; set; }
+        public string? Prompt { get; set; }
         public string OriginalImageUrl { get; set; }
         public string GeneratedImageUrl { get; set; }
-        public string? Prompt { get; set; }
-        public DateTime CreatedAt { get; set; }
-
         public string RoomTypeId { get; set; }
-        public RoomType RoomType { get; set; }
-
         public string DesignStyleId { get; set; }
-        public DesignStyle DesignStyle { get; set; }
 
-        public string UserId { get; set; }
         public User User { get; set; }
+        public RoomType RoomType { get; set; }
+        public DesignStyle DesignStyle { get; set; }
+        public ICollection<ChatMessage> ChatMessages { get; set; } = new List<ChatMessage>();
 
         public AIDesign()
         {
-            Id = Guid.NewGuid().ToString();
-            CreatedAt = DateTime.UtcNow;
+            UserId = string.Empty;
+            OriginalImageUrl = string.Empty;
+            GeneratedImageUrl = string.Empty;
+            RoomTypeId = string.Empty;
+            DesignStyleId = string.Empty;
+            User = null!;
+            RoomType = null!;
+            DesignStyle = null!;
         }
     }
 }

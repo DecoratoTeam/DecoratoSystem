@@ -1,20 +1,22 @@
 namespace Domain.Entities
 {
-    public class ChatMessage
+    public class ChatMessage : BaseEntity
     {
-        public string Id { get; set; }
-        public string ConversationId { get; set; }
-        public string Content { get; set; }
-        public bool IsFromUser { get; set; }
-        public DateTime CreatedAt { get; set; }
-
         public string UserId { get; set; }
+        public string? ConversationId { get; set; }
+        public bool IsFromUser { get; set; }
+        public string Content { get; set; }
+        public string? ImageUrl { get; set; }
+        public string? AIDesignId { get; set; }
+
         public User User { get; set; }
+        public AIDesign? AIDesign { get; set; }
 
         public ChatMessage()
         {
-            Id = Guid.NewGuid().ToString();
-            CreatedAt = DateTime.UtcNow;
+            UserId = string.Empty;
+            Content = string.Empty;
+            User = null!;
         }
     }
 }

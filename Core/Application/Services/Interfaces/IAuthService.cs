@@ -12,6 +12,10 @@ namespace Application.Services.Interfaces
         // ✅ Register returns RegisterResponseDto (without Token)
         Task<GeneralResponseDto<RegisterResponseDto>> RegisterAsync(RejesterDto rejesterDto, CancellationToken cancellationToken);
 
+        Task<GeneralResponseDto<AuthDto>> GoogleLoginAsync(GoogleLoginDto googleLoginDto, CancellationToken cancellationToken);
+
+        Task<GeneralResponseDto<ProfileDto>> GetProfileAsync(string userId, CancellationToken cancellationToken);
+
         Task<GeneralResponseDto<bool>> ForgotPasswordAsync(ForgotPasswordDto forgotPasswordDto, CancellationToken cancellationToken);
 
         Task<GeneralResponseDto<bool>> ResetPasswordAsync(ResetPasswordDto resetPasswordDto, CancellationToken cancellationToken);

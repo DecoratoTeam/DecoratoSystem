@@ -9,6 +9,6 @@ namespace Application.Authntication
 {
     public interface IjwtProvider
     {
-         (string Token,int ExpiersIn) GenerateJwtToken(User user);
+        (string Token, int ExpiersIn) GenerateJwtToken(User user);
     }
 }

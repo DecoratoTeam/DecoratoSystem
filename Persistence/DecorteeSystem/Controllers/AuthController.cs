@@ -1,9 +1,12 @@
-﻿using Application.Dtos.Auth;
+﻿using Application.Dtos;
+using Application.Dtos.Auth;
 using Application.Services.Interfaces;
 using DecorteeSystem.ViewModles;
 using DecorteeSystem.ViewModles.Auth;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace DecorteeSystem.Controllers
 {
@@ -30,7 +33,6 @@ namespace DecorteeSystem.Controllers
                 : GeneralResponseViewModle<RegisterResponseViewModle>.Fail(result.Error, result.Message));
         }
 
-        // ✅ Login - Returns 200 OK only (removed 400 Bad Request)
         [HttpPost("Login")]
         [ProducesResponseType(typeof(GeneralResponseViewModle<AuthViewModle>), StatusCodes.Status200OK)]
         public async Task<ActionResult<GeneralResponseViewModle<AuthViewModle>>> Login(
@@ -39,10 +41,40 @@ namespace DecorteeSystem.Controllers
         {
             var authDto = await _authService.LoginAsync(loginView.Adapt<LoginDto>(), cancellationToken);
 
-            // ✅ Always return 200 OK (even for errors)
             return Ok(authDto.IsSuccess
                 ? GeneralResponseViewModle<AuthViewModle>.Success(authDto.Data.Adapt<AuthViewModle>())
                 : GeneralResponseViewModle<AuthViewModle>.Fail(authDto.Error, authDto.Message));
+        }
+
+        [HttpPost("GoogleLogin")]
+        [ProducesResponseType(typeof(GeneralResponseViewModle<AuthViewModle>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<GeneralResponseViewModle<AuthViewModle>>> GoogleLogin(
+            [FromBody] GoogleLoginViewModle googleLoginView,
+            CancellationToken cancellationToken)
+        {
+            var authDto = await _authService.GoogleLoginAsync(googleLoginView.Adapt<GoogleLoginDto>(), cancellationToken);
+
+            return Ok(authDto.IsSuccess
+                ? GeneralResponseViewModle<AuthViewModle>.Success(authDto.Data.Adapt<AuthViewModle>())
+                : GeneralResponseViewModle<AuthViewModle>.Fail(authDto.Error, authDto.Message));
+        }
+
+        [ApiExplorerSettings(IgnoreApi = true)]
+        [Authorize]
+        [HttpGet("Profile")]
+        [ProducesResponseType(typeof(GeneralResponseViewModle<ProfileViewModle>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<GeneralResponseViewModle<ProfileViewModle>>> GetProfile(CancellationToken cancellationToken)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                return Unauthorized(GeneralResponseViewModle<ProfileViewModle>.Fail(ErrorType.InvalidCredentials, "Invalid token"));
+            }
+
+            var result = await _authService.GetProfileAsync(userId, cancellationToken);
+            return Ok(result.IsSuccess
+                ? GeneralResponseViewModle<ProfileViewModle>.Success(result.Data.Adapt<ProfileViewModle>())
+                : GeneralResponseViewModle<ProfileViewModle>.Fail(result.Error, result.Message));
         }
 
         [HttpPost("ForgotPassword")]
