@@ -7,6 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
 builder.Services.AddDependencies(builder.Configuration);
+builder.Services.AddHttpClient("DesignClient", client =>
+{
+    client.BaseAddress = new Uri("https://ebraam1-interior-ai-api.hf.space/");
+});
 
 var app = builder.Build();
 
