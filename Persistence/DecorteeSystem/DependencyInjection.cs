@@ -1,4 +1,4 @@
-﻿    using Application.Authntication;
+﻿using Application.Authntication;
 using Application.Services.Implementation;
 using Application.Services.Interfaces;
 using DecorteeSystem.MiddleWare;
@@ -118,6 +118,7 @@ namespace DecorteeSystem
             services.AddScoped<IChatMessageService, ChatMessageService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IDesignService, DesignService>();
 
             return services;
         }
