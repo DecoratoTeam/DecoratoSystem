@@ -10,6 +10,7 @@ builder.Services.AddDependencies(builder.Configuration);
 builder.Services.AddHttpClient("DesignClient", client =>
 {
     client.BaseAddress = new Uri("https://ebraam1-interior-ai-api.hf.space/");
+    client.Timeout = TimeSpan.FromSeconds(180);
 });
 
 var app = builder.Build();
